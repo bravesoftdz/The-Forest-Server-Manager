@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2017/04/25 20:30:45.000.517,=C:\Users\adria\OneDrive\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/04/29 23:24:59.000.340,=C:\Users\adria\OneDrive\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/04/29 23:28:16.000.401,=C:\Users\adria\OneDrive\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/05/04 20:12:45.000.882,=C:\Users\adria\OneDrive\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/05/05 13:42:58.000.747,=C:\Users\adria\OneDrive\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/05/06 21:38:21.000.755,=C:\Users\adria\OneDrive\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/05/06 21:39:14.000.543,C:\Users\adria\OneDrive\Documents\Embarcadero\Studio\Projects\The Forest Server Manager\uTFSM.pas=C:\Users\adria\OneDrive\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/05/06 21:39:14.000.543,C:\Users\adria\OneDrive\Documents\Embarcadero\Studio\Projects\The Forest Server Manager\uTFSM.dfm=C:\Users\adria\OneDrive\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2017/05/06 21:39:22.000.078,C:\Users\adria\OneDrive\Documents\Embarcadero\Studio\Projects\The Forest Server Manager\pTFSM.dproj=C:\Users\adria\OneDrive\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2017/05/06 22:00:32.000.013,=C:\Users\adria\OneDrive\Documents\Embarcadero\Studio\Projects\The Forest Server Manager\Unit2.pas</Transaction>
+    <Transaction>2017/05/06 22:00:44.000.309,C:\Users\adria\OneDrive\Documents\Embarcadero\Studio\Projects\The Forest Server Manager\uSettings.dfm=C:\Users\adria\OneDrive\Documents\Embarcadero\Studio\Projects\The Forest Server Manager\Unit2.dfm</Transaction>
+    <Transaction>2017/05/06 22:00:44.000.309,C:\Users\adria\OneDrive\Documents\Embarcadero\Studio\Projects\The Forest Server Manager\uSettings.pas=C:\Users\adria\OneDrive\Documents\Embarcadero\Studio\Projects\The Forest Server Manager\Unit2.pas</Transaction>
+  </Transactions>
+	<ActiveMobileDevice>
+		<NoProfile iOSSimulator="iPhone5"/>
+	</ActiveMobileDevice>
+</BorlandProject>
