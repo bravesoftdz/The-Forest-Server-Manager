@@ -16,7 +16,7 @@ It has to be in the same folder as the server or if you dont have a server yet g
 
 <h2>Whats Broken?</h2>
 <ul>
-  <li>Nothing that i know of...</li>
+  <li>Server Update/Install doesn't work like it should</li>
 </ul>
 
 <h2>Preview</h2> 
