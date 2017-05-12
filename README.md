@@ -20,7 +20,7 @@ A server manager for the game "The Forest" designed and coded by Inforcer25
 Note: You can close The Forest Server Manager after the server has started
 
 <h2>Download</h2>
-<a href="https://github.com/Inforcer25/The-Forest-Server-Manager/raw/master/The%20Forest%20Server%20Manager%20v0.3.exe">
+<a href="https://github.com/Inforcer25/The-Forest-Server-Manager/raw/master/The%20Forest%20Server%20Manager%20v0.3.1.exe">
   <img src="http://i.imgur.com/qoGP19r.png" alt="Download">
 </a>
 
