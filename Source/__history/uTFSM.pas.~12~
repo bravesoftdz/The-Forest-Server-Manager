@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
-  Vcl.Imaging.pngimage, uSettings, inifiles, ShellAPI;
+  Vcl.Imaging.pngimage, uSettings, uInstaller, inifiles, ShellAPI;
 
 type
   Tfrmmain = class(TForm)
@@ -23,6 +23,7 @@ type
     chk1: TCheckBox;
     lbl3: TLabel;
     lbl4: TLabel;
+    btn1: TButton;
     procedure FormShow(Sender: TObject);
     procedure btnsettingsClick(Sender: TObject);
     procedure btnstartClick(Sender: TObject);
@@ -33,6 +34,7 @@ type
     procedure btnupdateClick(Sender: TObject);
     procedure lbl3Click(Sender: TObject);
     procedure OpenURL (url : string);
+    procedure btn1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -57,11 +59,43 @@ end;
 procedure Tfrmmain.btnupdateClick(Sender: TObject);
 var
   parameters: string;
-  steamcmd: string;
+  steamcmd, path: string;
 begin
+  frminstaller.Show;
+
+
+{
   steamcmd := frmsettings.steamcmdpath + '\steamcmd.exe';
-  parameters := ' +login anonymous +force_install_dir ' + GetCurrentDir + ' +app_update 556450 +quit';
+  parameters := ' +login anonymous +force_install_dir "' + GetCurrentDir + '" +app_update 556450 +quit';
   ShellExecute(0, 'open', PChar(steamcmd), PChar(parameters), nil, SW_SHOW);
+}
+end;
+
+procedure Tfrmmain.btn1Click(Sender: TObject);
+begin
+   LoadSettings;
+
+   Application.Title := 'The Forest Server Manager';
+  serverconf := GetEnvironmentVariable('USERPROFILE') + '\AppData\LocalLow\SKS\TheForestDedicatedServer\ds\Server.cfg';
+
+  if FileExists('TheForestDedicatedServer.exe') then
+    begin
+      btnstart.Enabled := True;
+      btnupdate.Enabled := True;
+    end
+  else
+    begin
+      ShowMessage('Error: Could not find "TheForestDedicatedServer.exe"' + #13 + #13 +  'Is the server manager in the same folder as the server?');
+    end;
+
+  if FileExists(serverconf) then
+    mmo1.Lines.LoadFromFile(serverconf)
+  else
+    begin
+      mmo1.Lines.Add('Error: Could not find "Server.cfg"');
+      btnsaveconfig.Enabled := False;
+      btnrefreshconfig.Enabled := False;
+    end;
 end;
 
 procedure Tfrmmain.btnrefreshconfigClick(Sender: TObject);

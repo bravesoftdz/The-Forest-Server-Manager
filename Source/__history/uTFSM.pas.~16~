@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
-  Vcl.Imaging.pngimage, uSettings, uInstaller, inifiles, ShellAPI, Tlhelp32;
+  Vcl.Imaging.pngimage, uSettings, uInstaller, inifiles, ShellAPI;
 
 type
   Tfrmmain = class(TForm)
@@ -36,7 +36,6 @@ type
     procedure OpenURL (url : string);
     procedure btn1Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    function KillTask(ExeFileName: string): Integer;
   private
     { Private declarations }
   public
@@ -118,7 +117,6 @@ end;
 procedure Tfrmmain.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   frminstaller.dscmnd1.Stop;
-  KillTask('steamcmd.exe');
 end;
 
 procedure Tfrmmain.FormCreate(Sender: TObject);
@@ -151,34 +149,6 @@ procedure Tfrmmain.FormShow(Sender: TObject);
 begin
   mmo1.SetFocus;
   LoadSettings;
-end;
-
-function Tfrmmain.KillTask(ExeFileName: string): Integer;
-const
-  PROCESS_TERMINATE = $0001;
-var
-  ContinueLoop: BOOL;
-  FSnapshotHandle: THandle;
-  FProcessEntry32: TProcessEntry32;
-begin
-  Result := 0;
-  FSnapshotHandle := CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
-  FProcessEntry32.dwSize := SizeOf(FProcessEntry32);
-  ContinueLoop := Process32First(FSnapshotHandle, FProcessEntry32);
-
-  while Integer(ContinueLoop) <> 0 do
-  begin
-    if ((UpperCase(ExtractFileName(FProcessEntry32.szExeFile)) =
-      UpperCase(ExeFileName)) or (UpperCase(FProcessEntry32.szExeFile) =
-      UpperCase(ExeFileName))) then
-      Result := Integer(TerminateProcess(
-                        OpenProcess(PROCESS_TERMINATE,
-                                    BOOL(0),
-                                    FProcessEntry32.th32ProcessID),
-                                    0));
-     ContinueLoop := Process32Next(FSnapshotHandle, FProcessEntry32);
-  end;
-  CloseHandle(FSnapshotHandle);
 end;
 
 procedure Tfrmmain.lbl3Click(Sender: TObject);

@@ -118,7 +118,6 @@ end;
 procedure Tfrmmain.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   frminstaller.dscmnd1.Stop;
-  KillTask('steamcmd.exe');
 end;
 
 procedure Tfrmmain.FormCreate(Sender: TObject);

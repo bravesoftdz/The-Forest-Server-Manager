@@ -6,7 +6,7 @@ uses
   Vcl.Themes,
   Vcl.Styles,
   uSettings in 'uSettings.pas' {frmsettings},
-  uInstaller in 'uInstaller.pas' {frminstaller};
+  uInstaller in 'uInstaller.pas' {Form1};
 
 {$R *.res}
 
@@ -16,6 +16,6 @@ begin
   TStyleManager.TrySetStyle('Amakrits');
   Application.CreateForm(Tfrmmain, frmmain);
   Application.CreateForm(Tfrmsettings, frmsettings);
-  Application.CreateForm(Tfrminstaller, frminstaller);
+  Application.CreateForm(TForm1, Form1);
   Application.Run;
 end.

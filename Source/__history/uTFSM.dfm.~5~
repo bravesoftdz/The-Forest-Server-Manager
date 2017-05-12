@@ -5266,7 +5266,7 @@ object frmmain: Tfrmmain
       Width = 31
       Height = 19
       Anchors = [akLeft, akBottom]
-      Caption = 'v0.3'
+      Caption = 'v0.2'
     end
     object btnstart: TButton
       Left = 16
