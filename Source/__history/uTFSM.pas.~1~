@@ -60,7 +60,7 @@ var
   steamcmd: string;
 begin
   steamcmd := frmsettings.steamcmdpath + '\steamcmd.exe';
-  parameters := ' +login anonymous +force_install_dir "' + GetCurrentDir + '" +app_update 556450 +quit';
+  parameters := ' +login anonymous +force_install_dir ' + GetCurrentDir + ' +app_update 556450 +quit';
   ShellExecute(0, 'open', PChar(steamcmd), PChar(parameters), nil, SW_SHOW);
 end;
 
