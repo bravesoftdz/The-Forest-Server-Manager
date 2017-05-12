@@ -89,7 +89,11 @@ begin
     end;
 
   if FileExists(serverconf) then
-    mmo1.Lines.LoadFromFile(serverconf)
+    begin
+      mmo1.Lines.LoadFromFile(serverconf);
+      btnsaveconfig.Enabled := True;
+      btnrefreshconfig.Enabled := True;
+      end
   else
     begin
       mmo1.Lines.Add('Error: Could not find "Server.cfg"');
@@ -137,7 +141,11 @@ begin
     end;
 
   if FileExists(serverconf) then
-    mmo1.Lines.LoadFromFile(serverconf)
+    begin
+      mmo1.Lines.LoadFromFile(serverconf);
+      btnsaveconfig.Enabled := True;
+      btnrefreshconfig.Enabled := True;
+      end
   else
     begin
       mmo1.Lines.Add('Error: Could not find "Server.cfg"');
