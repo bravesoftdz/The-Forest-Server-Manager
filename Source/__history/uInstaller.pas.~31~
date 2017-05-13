@@ -111,7 +111,6 @@ end;
 procedure Tfrminstaller.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   KillTask('steamcmd.exe');
-  mmo1.Clear;
 end;
 
 procedure Tfrminstaller.FormShow(Sender: TObject);

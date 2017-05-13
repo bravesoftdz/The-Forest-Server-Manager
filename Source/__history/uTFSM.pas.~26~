@@ -44,10 +44,6 @@ type
     procedure btn1Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     function KillTask(ExeFileName: string): Integer;
-    procedure About1Click(Sender: TObject);
-    procedure VideoTutorial1Click(Sender: TObject);
-    procedure extTutorial1Click(Sender: TObject);
-    procedure ReportIssue1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -80,16 +76,6 @@ begin
   parameters := ' +login anonymous +force_install_dir "' + GetCurrentDir + '" +app_update 556450 +quit';
   ShellExecute(0, 'open', PChar(steamcmd), PChar(parameters), nil, SW_SHOW);
 }
-end;
-
-procedure Tfrmmain.extTutorial1Click(Sender: TObject);
-begin
-  OpenURL('https://inforcer25.github.io/The-Forest-Server-Manager/');
-end;
-
-procedure Tfrmmain.About1Click(Sender: TObject);
-begin
-  frmAbout.ShowModal;
 end;
 
 procedure Tfrmmain.btn1Click(Sender: TObject);
@@ -243,16 +229,6 @@ end;
 procedure Tfrmmain.OpenURL(url: string);
 begin
   ShellExecute(self.WindowHandle,'open',PChar(url),nil,nil, SW_SHOWNORMAL);
-end;
-
-procedure Tfrmmain.ReportIssue1Click(Sender: TObject);
-begin
-  OpenURL('https://github.com/Inforcer25/The-Forest-Server-Manager/issues/new');
-end;
-
-procedure Tfrmmain.VideoTutorial1Click(Sender: TObject);
-begin
-  OpenURL('https://www.youtube.com/watch?v=o5yDUHt5gL0');
 end;
 
 end.

@@ -7,7 +7,7 @@ uses
   Vcl.Styles,
   uSettings in 'uSettings.pas' {frmsettings},
   uInstaller in 'uInstaller.pas' {frminstaller},
-  uAbout in 'uAbout.pas' {frmabout};
+  uAbout in 'uAbout.pas' {Form1};
 
 {$R *.res}
 
@@ -18,6 +18,6 @@ begin
   Application.CreateForm(Tfrmmain, frmmain);
   Application.CreateForm(Tfrmsettings, frmsettings);
   Application.CreateForm(Tfrminstaller, frminstaller);
-  Application.CreateForm(Tfrmabout, frmabout);
+  Application.CreateForm(TForm1, Form1);
   Application.Run;
 end.

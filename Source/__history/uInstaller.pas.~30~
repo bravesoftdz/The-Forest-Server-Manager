@@ -82,10 +82,9 @@ begin
   Close;
 
   if dscmnd1.IsRunning = True then
-    begin
-      dscmnd1.Stop;
-      ShowMessage('Stopped Current Task!');
-    end;
+    dscmnd1.Stop
+  else
+    ShowMessage('Stopped Task!');
 end;
 
 procedure Tfrminstaller.btn4Click(Sender: TObject);
@@ -111,7 +110,6 @@ end;
 procedure Tfrminstaller.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   KillTask('steamcmd.exe');
-  mmo1.Clear;
 end;
 
 procedure Tfrminstaller.FormShow(Sender: TObject);

@@ -5,8 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
-  Vcl.Imaging.pngimage, uSettings, uInstaller, inifiles, ShellAPI, Tlhelp32,
-  Vcl.Menus, uAbout;
+  Vcl.Imaging.pngimage, uSettings, uInstaller, inifiles, ShellAPI, Tlhelp32;
 
 type
   Tfrmmain = class(TForm)
@@ -25,12 +24,6 @@ type
     lbl3: TLabel;
     lbl4: TLabel;
     btn1: TButton;
-    mm1: TMainMenu;
-    Files1: TMenuItem;
-    VideoTutorial1: TMenuItem;
-    extTutorial1: TMenuItem;
-    ReportIssue1: TMenuItem;
-    About1: TMenuItem;
     procedure FormShow(Sender: TObject);
     procedure btnsettingsClick(Sender: TObject);
     procedure btnstartClick(Sender: TObject);
@@ -44,10 +37,6 @@ type
     procedure btn1Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     function KillTask(ExeFileName: string): Integer;
-    procedure About1Click(Sender: TObject);
-    procedure VideoTutorial1Click(Sender: TObject);
-    procedure extTutorial1Click(Sender: TObject);
-    procedure ReportIssue1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -74,22 +63,12 @@ var
   parameters: string;
   steamcmd, path: string;
 begin
-  frminstaller.ShowModal;
+  frminstaller.Show;
 {
   steamcmd := frmsettings.steamcmdpath + '\steamcmd.exe';
   parameters := ' +login anonymous +force_install_dir "' + GetCurrentDir + '" +app_update 556450 +quit';
   ShellExecute(0, 'open', PChar(steamcmd), PChar(parameters), nil, SW_SHOW);
 }
-end;
-
-procedure Tfrmmain.extTutorial1Click(Sender: TObject);
-begin
-  OpenURL('https://inforcer25.github.io/The-Forest-Server-Manager/');
-end;
-
-procedure Tfrmmain.About1Click(Sender: TObject);
-begin
-  frmAbout.ShowModal;
 end;
 
 procedure Tfrmmain.btn1Click(Sender: TObject);
@@ -243,16 +222,6 @@ end;
 procedure Tfrmmain.OpenURL(url: string);
 begin
   ShellExecute(self.WindowHandle,'open',PChar(url),nil,nil, SW_SHOWNORMAL);
-end;
-
-procedure Tfrmmain.ReportIssue1Click(Sender: TObject);
-begin
-  OpenURL('https://github.com/Inforcer25/The-Forest-Server-Manager/issues/new');
-end;
-
-procedure Tfrmmain.VideoTutorial1Click(Sender: TObject);
-begin
-  OpenURL('https://www.youtube.com/watch?v=o5yDUHt5gL0');
 end;
 
 end.

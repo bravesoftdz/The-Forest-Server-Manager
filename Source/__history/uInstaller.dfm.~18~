@@ -13,7 +13,6 @@ object frminstaller: Tfrminstaller
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  Position = poMainFormCenter
   OnClose = FormClose
   OnShow = FormShow
   PixelsPerInch = 96
@@ -25,6 +24,7 @@ object frminstaller: Tfrminstaller
     Height = 392
     Align = alLeft
     TabOrder = 0
+    ExplicitHeight = 382
     object btn1: TButton
       Left = 32
       Top = 16
@@ -52,15 +52,6 @@ object frminstaller: Tfrminstaller
       TabOrder = 2
       OnClick = btn3Click
     end
-    object btn4: TButton
-      Left = 32
-      Top = 176
-      Width = 129
-      Height = 65
-      Caption = 'Validate'
-      TabOrder = 3
-      OnClick = btn4Click
-    end
   end
   object mmo1: TMemo
     Left = 193
@@ -76,12 +67,14 @@ object frminstaller: Tfrminstaller
     ParentFont = False
     ReadOnly = True
     TabOrder = 1
+    ExplicitWidth = 421
+    ExplicitHeight = 382
   end
   object dscmnd1: TDosCommand
     InputToOutput = False
     MaxTimeAfterBeginning = 0
     MaxTimeAfterLastOutput = 0
-    Left = 280
-    Top = 96
+    Left = 136
+    Top = 208
   end
 end
