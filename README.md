@@ -2,6 +2,10 @@
 A server manager for the game "The Forest" designed and coded by Inforcer25
 
 <h2>Instructions</h2>
+Watch <a href="https://youtu.be/o5yDUHt5gL0">Video Tutorial</a>
+<br/>
+or
+<br/>
 1. Download and extract steamcmd to anywhere
 <br/>
 2. Click on settings and browse to the folder where steamcmd is located then click save.
