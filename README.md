@@ -43,6 +43,14 @@ Note: You can close The Forest Server Manager after the server has started
   <li>Nothing that i know of</li>
 </ul>
 
+<h2>Tested on: (Without Steam installed)</h2>
+<ul>
+  <li>Windows 10</li>
+  <li>Windows 7</li>
+  <li>Windows Server 2016</li>
+  <li>Windows Server 2012</li>
+  <li>Windows Server 2008</li>
+</ul>
 <h2>Preview</h2> 
 <img src="http://i.imgur.com/pd9gzS4.png" alt="Preview">
 
