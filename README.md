@@ -27,6 +27,14 @@ Note: You can close The Forest Server Manager after the server has started
 <a href="https://github.com/Inforcer25/The-Forest-Server-Manager/raw/master/The%20Forest%20Server%20Manager%20v0.5.exe">
   <img src="http://i.imgur.com/qoGP19r.png" alt="Download">
 </a>
+<br/>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="556HKL38BCDUS">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
 
 <h2>Whats new?</h2>
 <ul>
