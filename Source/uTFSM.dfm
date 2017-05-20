@@ -2,7 +2,7 @@ object frmmain: Tfrmmain
   Left = 0
   Top = 0
   Caption = 'The Forest Server Manager  (Public Testing Phase)'
-  ClientHeight = 764
+  ClientHeight = 745
   ClientWidth = 983
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -11587,20 +11587,21 @@ object frmmain: Tfrmmain
     Left = 0
     Top = 113
     Width = 185
-    Height = 651
+    Height = 632
     Align = alLeft
     TabOrder = 0
-    ExplicitHeight = 633
+    ExplicitHeight = 611
     DesignSize = (
       185
-      651)
+      632)
     object lbl2: TLabel
       Left = 16
-      Top = 576
+      Top = 557
       Width = 138
       Height = 19
       Anchors = [akLeft, akBottom]
       Caption = 'Made by Inforcer25'
+      ExplicitTop = 576
     end
     object lbl3: TLabel
       Left = 16
@@ -11620,15 +11621,31 @@ object frmmain: Tfrmmain
     end
     object lbl4: TLabel
       Left = 16
-      Top = 601
+      Top = 582
       Width = 31
       Height = 19
       Anchors = [akLeft, akBottom]
-      Caption = 'v0.4'
+      Caption = 'v0.5'
+    end
+    object lbl5: TLabel
+      Left = 16
+      Top = 336
+      Width = 131
+      Height = 19
+      Cursor = crHandPoint
+      Caption = 'Get Oxide Plugins '
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clAqua
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = [fsItalic, fsUnderline]
+      ParentFont = False
+      StyleElements = [seClient, seBorder]
+      OnClick = lbl5Click
     end
     object btnstart: TButton
       Left = 16
-      Top = 185
+      Top = 73
       Width = 153
       Height = 65
       Caption = 'Start Server'
@@ -11644,7 +11661,7 @@ object frmmain: Tfrmmain
     end
     object btnupdate: TButton
       Left = 16
-      Top = 377
+      Top = 185
       Width = 153
       Height = 65
       Caption = 'Update/Install Server'
@@ -11676,12 +11693,12 @@ object frmmain: Tfrmmain
     object btnsaveconfig: TButton
       Left = 16
       Top = 14
-      Width = 153
-      Height = 65
+      Width = 97
+      Height = 43
       Caption = 'Save Config'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -21
+      Font.Height = -16
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
@@ -11689,14 +11706,14 @@ object frmmain: Tfrmmain
       OnClick = btnsaveconfigClick
     end
     object btnrefreshconfig: TButton
-      Left = 16
-      Top = 93
-      Width = 153
-      Height = 65
-      Caption = 'Refresh Config'
+      Left = 112
+      Top = 14
+      Width = 57
+      Height = 43
+      Caption = 'Reload'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -21
+      Font.Height = -16
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
@@ -11705,7 +11722,7 @@ object frmmain: Tfrmmain
     end
     object chk1: TCheckBox
       Left = 16
-      Top = 256
+      Top = 144
       Width = 138
       Height = 17
       Caption = 'Without Steam'
@@ -11715,19 +11732,28 @@ object frmmain: Tfrmmain
     end
     object btn1: TButton
       Left = 16
-      Top = 306
+      Top = 377
       Width = 153
       Height = 65
       Caption = 'Reload Everything'
       TabOrder = 6
       OnClick = btn1Click
     end
+    object btn2: TButton
+      Left = 16
+      Top = 256
+      Width = 153
+      Height = 65
+      Caption = 'Install OxideMod'
+      TabOrder = 7
+      OnClick = btn2Click
+    end
   end
   object mmo1: TMemo
     Left = 185
     Top = 113
     Width = 798
-    Height = 651
+    Height = 632
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -11737,7 +11763,7 @@ object frmmain: Tfrmmain
     ParentFont = False
     ScrollBars = ssVertical
     TabOrder = 1
-    ExplicitHeight = 633
+    ExplicitHeight = 611
   end
   object pnl2: TPanel
     Left = 0

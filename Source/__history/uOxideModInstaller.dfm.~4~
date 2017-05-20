@@ -1,0 +1,46 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  BorderStyle = bsDialog
+  Caption = 'progra'
+  ClientHeight = 188
+  ClientWidth = 425
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -21
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  PixelsPerInch = 96
+  TextHeight = 25
+  object lbl1: TLabel
+    Left = 0
+    Top = 0
+    Width = 425
+    Height = 57
+    Align = alTop
+    Alignment = taCenter
+    Caption = 
+      'To start the installation press "Start" below. It will download ' +
+      'and install oxidemod'
+    WordWrap = True
+    ExplicitWidth = 506
+  end
+  object btn1: TButton
+    Left = 144
+    Top = 112
+    Width = 137
+    Height = 49
+    Caption = 'Start'
+    TabOrder = 0
+  end
+  object pb1: TProgressBar
+    Left = 8
+    Top = 80
+    Width = 409
+    Height = 17
+    TabOrder = 1
+  end
+end

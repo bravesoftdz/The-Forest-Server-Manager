@@ -7,7 +7,8 @@ uses
   Vcl.Styles,
   uSettings in 'uSettings.pas' {frmsettings},
   uInstaller in 'uInstaller.pas' {frminstaller},
-  uAbout in 'uAbout.pas' {frmabout};
+  uAbout in 'uAbout.pas' {frmabout},
+  uOxideModInstaller in 'uOxideModInstaller.pas' {frmoxidemod};
 
 {$R *.res}
 
@@ -19,5 +20,6 @@ begin
   Application.CreateForm(Tfrmsettings, frmsettings);
   Application.CreateForm(Tfrminstaller, frminstaller);
   Application.CreateForm(Tfrmabout, frmabout);
+  Application.CreateForm(Tfrmoxidemod, frmoxidemod);
   Application.Run;
 end.

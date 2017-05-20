@@ -1,4 +1,4 @@
-<h1>The Forest Server Manager v0.4</h1>
+<h1>The Forest Server Manager v0.5</h1>
 A server manager for the game "The Forest" designed and coded by Inforcer25
 
 <h2>Instructions</h2>
@@ -24,18 +24,14 @@ or
 Note: You can close The Forest Server Manager after the server has started
 
 <h2>Download</h2>
-<a href="https://github.com/Inforcer25/The-Forest-Server-Manager/raw/master/The%20Forest%20Server%20Manager%20v0.4.exe">
+<a href="https://github.com/Inforcer25/The-Forest-Server-Manager/raw/master/The%20Forest%20Server%20Manager%20v0.5.exe">
   <img src="http://i.imgur.com/qoGP19r.png" alt="Download">
 </a>
 
 <h2>Whats new?</h2>
 <ul>
-  <li>Added "Tutorials"</li>
-  <li>Added "About" Form</li>
-  <li>Added "Report Issue" Option</li>
-  <li>Added "Validate" option in the installer/updater</li>
-  <li>Fixes</li>
-  <li>Changed that "hard to see" icon (The icons comes from the movie and not the game)</li>
+  <li>Fixed a memory leak</li>
+  <li>Added support for OxideMod</li>
 </ul>
 
 <h2>Whats Broken?</h2>
@@ -52,7 +48,9 @@ Note: You can close The Forest Server Manager after the server has started
   <li>Windows Server 2008</li>
 </ul>
 <h2>Preview</h2> 
-<img src="http://i.imgur.com/pd9gzS4.png" alt="Preview">
+<img src="http://i.imgur.com/VRe8lWg.png" alt="Preview">
+<img src="http://i.imgur.com/QfwFq26.png" alt="Preview">
+<img src="http://i.imgur.com/VCXxmaT.png" alt="Preview">
 
 <h2>For Developers</h2>
 This was made & compiled with Rad Studio Tokyo 10.2

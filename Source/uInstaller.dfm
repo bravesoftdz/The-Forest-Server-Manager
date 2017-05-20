@@ -4,7 +4,7 @@ object frminstaller: Tfrminstaller
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'The Forest Server Installer/Updater'
-  ClientHeight = 392
+  ClientHeight = 385
   ClientWidth = 687
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -22,9 +22,10 @@ object frminstaller: Tfrminstaller
     Left = 0
     Top = 0
     Width = 193
-    Height = 392
+    Height = 385
     Align = alLeft
     TabOrder = 0
+    ExplicitHeight = 392
     object btn1: TButton
       Left = 32
       Top = 16
@@ -66,7 +67,7 @@ object frminstaller: Tfrminstaller
     Left = 193
     Top = 0
     Width = 494
-    Height = 392
+    Height = 385
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -76,6 +77,7 @@ object frminstaller: Tfrminstaller
     ParentFont = False
     ReadOnly = True
     TabOrder = 1
+    ExplicitHeight = 392
   end
   object dscmnd1: TDosCommand
     InputToOutput = False

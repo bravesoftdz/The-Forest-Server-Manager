@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
   Vcl.Imaging.pngimage, uSettings, uInstaller, inifiles, ShellAPI, Tlhelp32,
-  Vcl.Menus, uAbout;
+  Vcl.Menus, uAbout, uOxideModInstaller;
 
 type
   Tfrmmain = class(TForm)
@@ -31,6 +31,8 @@ type
     extTutorial1: TMenuItem;
     ReportIssue1: TMenuItem;
     About1: TMenuItem;
+    btn2: TButton;
+    lbl5: TLabel;
     procedure FormShow(Sender: TObject);
     procedure btnsettingsClick(Sender: TObject);
     procedure btnstartClick(Sender: TObject);
@@ -48,6 +50,8 @@ type
     procedure VideoTutorial1Click(Sender: TObject);
     procedure extTutorial1Click(Sender: TObject);
     procedure ReportIssue1Click(Sender: TObject);
+    procedure btn2Click(Sender: TObject);
+    procedure lbl5Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -121,6 +125,11 @@ begin
       btnsaveconfig.Enabled := False;
       btnrefreshconfig.Enabled := False;
     end;
+end;
+
+procedure Tfrmmain.btn2Click(Sender: TObject);
+begin
+  frmoxidemod.ShowModal;
 end;
 
 procedure Tfrmmain.btnrefreshconfigClick(Sender: TObject);
@@ -213,6 +222,11 @@ end;
 procedure Tfrmmain.lbl3Click(Sender: TObject);
 begin
   OpenURL('https://github.com/Inforcer25/The-Forest-Server-Manager');
+end;
+
+procedure Tfrmmain.lbl5Click(Sender: TObject);
+begin
+  OpenURL('http://oxidemod.org/plugins/categories/the-forest.51/');
 end;
 
 procedure Tfrmmain.LoadSettings;
