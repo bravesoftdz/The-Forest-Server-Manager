@@ -2,7 +2,7 @@
 A server manager for the game "The Forest" designed and coded by Inforcer25
 
 <h2>Instructions</h2>
-Watch <a href="https://www.youtube.com/watch?v=o5yDUHt5gL0">Video Tutorial</a>
+Watch <a href="https://youtu.be/k73XwYgzims">Video Tutorial</a>
 <br/>
 or
 <br/>
