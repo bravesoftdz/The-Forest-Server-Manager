@@ -2,7 +2,7 @@
 A server manager for the game "The Forest" designed and coded by Inforcer25
 
 <h2>Instructions</h2>
-Watch <a href="https://youtu.be/o5yDUHt5gL0">Video Tutorial</a>
+Watch <a href="https://www.youtube.com/watch?v=o5yDUHt5gL0">Video Tutorial</a>
 <br/>
 or
 <br/>
@@ -22,6 +22,11 @@ or
 <br/>
 <br/>
 Note: You can close The Forest Server Manager after the server has started
+
+<h2>Thanks to</h2>
+<ul>
+  <li><a href="https://github.com/Zawuza">Andrei Aleksandrov</a>(MultiThread support for oxidemod installer)</li>
+</ul>
 
 <h2>Download</h2>
 <a href="https://github.com/Inforcer25/The-Forest-Server-Manager/raw/master/The%20Forest%20Server%20Manager%20v0.5.exe">
