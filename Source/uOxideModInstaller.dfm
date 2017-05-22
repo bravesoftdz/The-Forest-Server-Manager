@@ -3,8 +3,8 @@ object frmoxidemod: Tfrmoxidemod
   Top = 0
   BorderStyle = bsDialog
   Caption = 'OxideMod Installer'
-  ClientHeight = 189
-  ClientWidth = 430
+  ClientHeight = 204
+  ClientWidth = 458
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,15 +18,15 @@ object frmoxidemod: Tfrmoxidemod
   object lbl1: TLabel
     Left = 0
     Top = 0
-    Width = 430
+    Width = 458
     Height = 50
     Align = alTop
     Alignment = taCenter
     Caption = 
-      'To start the installation press "Start" below.  It will download' +
-      ' and install oxidemod'
+      'To start the installation press the button below.  It will downl' +
+      'oad and install oxidemod'
     WordWrap = True
-    ExplicitWidth = 422
+    ExplicitWidth = 425
   end
   object lblStatus: TLabel
     Left = 8
@@ -41,19 +41,38 @@ object frmoxidemod: Tfrmoxidemod
     Font.Style = []
     ParentFont = False
   end
+  object lbl2: TLabel
+    Left = 0
+    Top = 168
+    Width = 458
+    Height = 36
+    Align = alBottom
+    Alignment = taCenter
+    Caption = 
+      'You need to reinstall Oxide after updating/Validating the server' +
+      #13#10
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    ExplicitTop = 186
+    ExplicitWidth = 409
+  end
   object btn1: TButton
-    Left = 144
-    Top = 120
-    Width = 137
+    Left = 145
+    Top = 103
+    Width = 169
     Height = 49
-    Caption = 'Start'
+    Caption = 'Install/Reinstall'
     TabOrder = 0
     OnClick = btn1Click
   end
   object pb1: TProgressBar
     Left = 8
     Top = 80
-    Width = 409
+    Width = 433
     Height = 17
     TabOrder = 1
   end

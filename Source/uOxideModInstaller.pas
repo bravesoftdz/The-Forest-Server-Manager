@@ -16,6 +16,7 @@ type
     btn1: TButton;
     pb1: TProgressBar;
     lblStatus: TLabel;
+    lbl2: TLabel;
     procedure btn1Click(Sender: TObject);
   private
     { Private declarations }
@@ -138,7 +139,7 @@ begin
     end
   else
     begin
-      ShowMessage('Zip File is not valid');
+      ShowMessage('Error installing oxide!');
       frmoxidemod.lblStatus.Caption := 'Error Installing Oxide!';
     end;
 end;
