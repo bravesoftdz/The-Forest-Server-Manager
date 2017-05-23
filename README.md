@@ -1,4 +1,4 @@
-<h1>The Forest Server Manager v0.6</h1>
+<h1>The Forest Server Manager v0.7</h1>
 A server manager for the game "The Forest" designed and coded by Inforcer25
 
 <h2>Instructions</h2>
@@ -24,7 +24,7 @@ or
 Note: You can close The Forest Server Manager after the server has started
 
 <h2>Download</h2>
-<a href="https://github.com/Inforcer25/The-Forest-Server-Manager/raw/master/The%20Forest%20Server%20Manager%20v0.6.exe">
+<a href="https://github.com/Inforcer25/The-Forest-Server-Manager/raw/master/The%20Forest%20Server%20Manager%20v0.7.exe">
   <img src="http://i.imgur.com/qoGP19r.png" alt="Download">
 </a>
 <br/>
@@ -39,6 +39,7 @@ Note: You can close The Forest Server Manager after the server has started
 <h2>Whats new?</h2>
 <ul>
   <li>Fix for crash when installing oxidemod on some computers</li>
+  <li>Fix for starting the server in the background (Server Will start like it should)</li>
   <li>Added support for OxideMod</li>
 </ul>
 

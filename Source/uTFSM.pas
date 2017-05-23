@@ -68,7 +68,7 @@ implementation
 procedure Tfrmmain.btnstartClick(Sender: TObject);
 begin
   if chk1.Checked then
-    WinExec('TheForestDedicatedServer.exe -nosteamclient', SW_HIDE)
+    WinExec('TheForestDedicatedServer.exe -nosteamclient', SW_SHOWNORMAL)
   else
     WinExec('TheForestDedicatedServer.exe', SW_SHOWNORMAL)
 end;

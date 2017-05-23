@@ -2,7 +2,7 @@ object frmmain: Tfrmmain
   Left = 0
   Top = 0
   Caption = 'The Forest Server Manager (Beta)'
-  ClientHeight = 743
+  ClientHeight = 748
   ClientWidth = 983
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -11587,16 +11587,16 @@ object frmmain: Tfrmmain
     Left = 0
     Top = 113
     Width = 185
-    Height = 630
+    Height = 635
     Align = alLeft
     TabOrder = 0
     ExplicitHeight = 610
     DesignSize = (
       185
-      630)
+      635)
     object lbl2: TLabel
       Left = 16
-      Top = 555
+      Top = 560
       Width = 138
       Height = 19
       Anchors = [akLeft, akBottom]
@@ -11621,12 +11621,11 @@ object frmmain: Tfrmmain
     end
     object lbl4: TLabel
       Left = 16
-      Top = 580
+      Top = 585
       Width = 31
       Height = 19
       Anchors = [akLeft, akBottom]
-      Caption = 'v0.6'
-      ExplicitTop = 579
+      Caption = 'v0.7'
     end
     object lbl5: TLabel
       Left = 16
@@ -11754,7 +11753,7 @@ object frmmain: Tfrmmain
     Left = 185
     Top = 113
     Width = 798
-    Height = 630
+    Height = 635
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
