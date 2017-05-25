@@ -24,7 +24,7 @@ or
 Note: You can close The Forest Server Manager after the server has started
 
 <h2>Download</h2>
-<a href="https://github.com/Inforcer25/The-Forest-Server-Manager/raw/master/The%20Forest%20Server%20Manager%20v1.0.exe">
+<a href="https://github.com/Inforcer25/The-Forest-Server-Manager/releases">
   <img src="http://i.imgur.com/qoGP19r.png" alt="Download">
 </a>
 <br/>
@@ -34,25 +34,6 @@ Note: You can close The Forest Server Manager after the server has started
 <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
 <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
 </form>
-
-
-<h2>Whats new?</h2>
-<ul>
-  <li>Released v1.0!</li>
-  <li>Added Themes</li>
-  <li>You can now edit the config in a GUI</li>
-  <li>Automatically sets the server IP (IPv4)</li>
-  <li>Full Re-design</li>
-  <li>Added 'Links' (Plugins, SteamCMD, Check for updates)</li>
-  <li>A lot more fixes and its faster now!</li>
-  <li>Added support for OxideMod</li>
-  <li>A lot more stuff I can't remember</li>
-</ul>
-
-<h2>Whats Broken?</h2>
-<ul>
-  <li>Nothing that i know of</li>
-</ul>
 
 <h2>Tested on: (Without Steam installed)</h2>
 <ul>
