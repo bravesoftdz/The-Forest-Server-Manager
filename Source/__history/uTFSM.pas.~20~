@@ -427,7 +427,6 @@ procedure TForm1.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   KillTask('steamcmd.exe');
   btn5.Click;
-  btn7.Click;
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
@@ -538,25 +537,21 @@ begin
     begin
       ini := TIniFile.Create(ini_serverconfig);
       try
-        maxplayers := '8';
-        autosave := '30';
-        saveslot := '1';
-
         steamport := ini.ReadString('Server Config', 'serverSteamPort', '8766');
         gameport := ini.ReadString('Server Config', 'serverGamePort', '27015');
         queryport := ini.ReadString('Server Config', 'serverQueryPort', '27016');
-        servername := ini.ReadString('Server Config', 'serverName', '');
+        servername := ini.ReadString('Server Config', 'serverName', servername);
         maxplayers := ini.ReadString('Server Config', 'serverPlayers', '8');
-        vac := ini.ReadString('Server Config', 'enableVAC', 'on');
-        serverpass := ini.ReadString('Server Config', 'serverPassword', '');
-        adminpass := ini.ReadString('Server Config', 'serverPasswordAdmin', '');
-        steamtoken := ini.ReadString('Server Config', 'serverSteamAccount', '');
+        vac := ini.ReadString('Server Config', 'enableVAC', vac);
+        serverpass := ini.ReadString('Server Config', 'serverPassword', serverpass);
+        adminpass := ini.ReadString('Server Config', 'serverPasswordAdmin', adminpass);
+        steamtoken := ini.ReadString('Server Config', 'serverSteamAccount', steamtoken);
         autosave := ini.ReadString('Server Config', 'serverAutoSaveInterval', '30');
-        difficulty := ini.ReadString('Server Config', 'difficulty', 'Normal');
-        inittype := ini.ReadString('Server Config', 'initType', 'Continue');
-        saveslot := ini.ReadString('Server Config', 'slot', '1');
-        showlog := ini.ReadString('Server Config', 'showLogs', 'on');
-        email := ini.ReadString('Server Config', 'serverContact', '');
+        difficulty := ini.ReadString('Server Config', 'difficulty', difficulty);
+        inittype := ini.ReadString('Server Config', 'initType', inittype);
+        saveslot := ini.ReadString('Server Config', 'slot', saveslot);
+        showlog := ini.ReadString('Server Config', 'showLogs', showlog);
+        email := ini.ReadString('Server Config', 'serverContact', email);
 
         lbledtedtsteamport.Text := steamport;
         lbledtgameport.Text := gameport;

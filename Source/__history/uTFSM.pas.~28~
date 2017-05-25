@@ -427,7 +427,6 @@ procedure TForm1.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   KillTask('steamcmd.exe');
   btn5.Click;
-  btn7.Click;
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);

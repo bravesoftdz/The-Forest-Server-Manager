@@ -79,6 +79,8 @@ type
     GetOxidePlugins1: TMenuItem;
     Checkforupdates1: TMenuItem;
     cbbthemelist: TComboBox;
+    SteamCMD1: TMenuItem;
+    btn13: TButton;
     procedure btn2MouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure btn2MouseUp(Sender: TObject; Button: TMouseButton;
@@ -116,6 +118,7 @@ type
     procedure GetOxidePlugins1Click(Sender: TObject);
     procedure Checkforupdates1Click(Sender: TObject);
     procedure cbbthemelistChange(Sender: TObject);
+    procedure SteamCMD1Click(Sender: TObject);
   private
     //
   public
@@ -423,6 +426,7 @@ end;
 procedure TForm1.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   KillTask('steamcmd.exe');
+  btn5.Click;
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
@@ -438,15 +442,16 @@ begin
     end;
 
   ini_serverconfig := GetEnvironmentVariable('APPDATA') + '\TheForestServerManager\serverconfig.ini';
-  LoadServerConfig;
   Application.Title := 'The Forest Server Manager';
 
   lblipv4.Caption := 'IPv4: ' + GetLocalIP;
 
-  for stylename in TStylemanager.StyleNames do
-    cbbthemelist.Items.Add(stylename);
+  if DirectoryExists(GetEnvironmentVariable('APPDATA') + '\TheForestServerManager') then
+    //
+  else
+    MkDir(GetEnvironmentVariable('APPDATA') + '\TheForestServerManager');
 
-  cbbthemelist.ItemIndex := cbbthemelist.Items.IndexOf(TStyleManager.ActiveStyle.Name);
+  LoadServerConfig;
 end;
 
 function TForm1.GetLocalIP: string;
@@ -525,28 +530,30 @@ var
   steamport, gameport, queryport: string;
   servername, maxplayers, vac, serverpass: string;
   adminpass, steamtoken, autosave, difficulty, inittype: string;
-  saveslot, showlog, email: string;
+  saveslot, showlog, email, stylename, theme: string;
   ini: TIniFile;
 begin
   if FileExists(ini_serverconfig) then
     begin
       ini := TIniFile.Create(ini_serverconfig);
       try
-        steamport := ini.ReadString('Server Config', 'serverSteamPort', steamport);
-        gameport := ini.ReadString('Server Config', 'serverGamePort', gameport);
-        queryport := ini.ReadString('Server Config', 'serverQueryPort', queryport);
-        servername := ini.ReadString('Server Config', 'serverName', servername);
-        maxplayers := ini.ReadString('Server Config', 'serverPlayers', maxplayers);
-        vac := ini.ReadString('Server Config', 'enableVAC', vac);
-        serverpass := ini.ReadString('Server Config', 'serverPassword', serverpass);
-        adminpass := ini.ReadString('Server Config', 'serverPasswordAdmin', adminpass);
-        steamtoken := ini.ReadString('Server Config', 'serverSteamAccount', steamtoken);
-        autosave := ini.ReadString('Server Config', 'serverAutoSaveInterval', autosave);
-        difficulty := ini.ReadString('Server Config', 'difficulty', difficulty);
-        inittype := ini.ReadString('Server Config', 'initType', inittype);
-        saveslot := ini.ReadString('Server Config', 'slot', saveslot);
-        showlog := ini.ReadString('Server Config', 'showLogs', showlog);
-        email := ini.ReadString('Server Config', 'serverContact', email);
+        maxplayers := 8;
+
+        steamport := ini.ReadString('Server Config', 'serverSteamPort', '8766');
+        gameport := ini.ReadString('Server Config', 'serverGamePort', '27015');
+        queryport := ini.ReadString('Server Config', 'serverQueryPort', '27016');
+        servername := ini.ReadString('Server Config', 'serverName', '');
+        maxplayers := ini.ReadString('Server Config', 'serverPlayers', '8');
+        vac := ini.ReadString('Server Config', 'enableVAC', 'on');
+        serverpass := ini.ReadString('Server Config', 'serverPassword', '');
+        adminpass := ini.ReadString('Server Config', 'serverPasswordAdmin', '');
+        steamtoken := ini.ReadString('Server Config', 'serverSteamAccount', '');
+        autosave := ini.ReadString('Server Config', 'serverAutoSaveInterval', '30');
+        difficulty := ini.ReadString('Server Config', 'difficulty', 'Normal');
+        inittype := ini.ReadString('Server Config', 'initType', 'Continue');
+        saveslot := ini.ReadString('Server Config', 'slot', '1');
+        showlog := ini.ReadString('Server Config', 'showLogs', 'on');
+        email := ini.ReadString('Server Config', 'serverContact', '');
 
         lbledtedtsteamport.Text := steamport;
         lbledtgameport.Text := gameport;
@@ -582,10 +589,17 @@ begin
         AlphaBlendValue := StrToInt(ini.ReadString('Transparency', 'AlphaBlendValue', ''));
         trckbr1.Position := AlphaBlendValue;
 
-        TStyleManager.TrySetStyle(ini.ReadString('Application Settings', 'Theme', ''))
+        TStyleManager.SetStyle(ini.ReadString('Application Settings', 'Theme', cbbthemelist.Items[cbbthemelist.ItemIndex]));
+
       finally
         ini.Free;
       end;
+    end;
+
+  for stylename in TStylemanager.StyleNames do
+    begin
+      cbbthemelist.Items.Add(stylename);
+      cbbthemelist.ItemIndex := cbbthemelist.Items.IndexOf(TStyleManager.ActiveStyle.Name);
     end;
 end;
 
@@ -608,6 +622,11 @@ end;
 procedure TForm1.ReportaBUG1Click(Sender: TObject);
 begin
   OpenURL('https://github.com/Inforcer25/The-Forest-Server-Manager/issues');
+end;
+
+procedure TForm1.SteamCMD1Click(Sender: TObject);
+begin
+  OpenURL('https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip');
 end;
 
 procedure TForm1.trckbr1Change(Sender: TObject);

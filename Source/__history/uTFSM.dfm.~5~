@@ -5185,6 +5185,7 @@ object Form1: TForm1
       Height = 25
       Caption = 'btn13'
       TabOrder = 2
+      OnClick = btn13Click
     end
   end
   object pgc1: TPageControl
@@ -5344,7 +5345,7 @@ object Form1: TForm1
         MaxValue = 100
         MinValue = 1
         TabOrder = 4
-        Value = 8
+        Value = 1
       end
       object edtsteamtoken: TEdit
         Left = 183

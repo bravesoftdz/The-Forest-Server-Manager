@@ -427,7 +427,6 @@ procedure TForm1.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   KillTask('steamcmd.exe');
   btn5.Click;
-  btn7.Click;
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
@@ -538,10 +537,6 @@ begin
     begin
       ini := TIniFile.Create(ini_serverconfig);
       try
-        maxplayers := '8';
-        autosave := '30';
-        saveslot := '1';
-
         steamport := ini.ReadString('Server Config', 'serverSteamPort', '8766');
         gameport := ini.ReadString('Server Config', 'serverGamePort', '27015');
         queryport := ini.ReadString('Server Config', 'serverQueryPort', '27016');
@@ -552,8 +547,8 @@ begin
         adminpass := ini.ReadString('Server Config', 'serverPasswordAdmin', '');
         steamtoken := ini.ReadString('Server Config', 'serverSteamAccount', '');
         autosave := ini.ReadString('Server Config', 'serverAutoSaveInterval', '30');
-        difficulty := ini.ReadString('Server Config', 'difficulty', 'Normal');
-        inittype := ini.ReadString('Server Config', 'initType', 'Continue');
+        difficulty := ini.ReadString('Server Config', 'difficulty', rgdifficulty.ItemIndex :=2);
+        inittype := ini.ReadString('Server Config', 'initType', rginittype.ItemIndex := 2);
         saveslot := ini.ReadString('Server Config', 'slot', '1');
         showlog := ini.ReadString('Server Config', 'showLogs', 'on');
         email := ini.ReadString('Server Config', 'serverContact', '');

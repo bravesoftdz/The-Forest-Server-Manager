@@ -1,4 +1,4 @@
-<h1>The Forest Server Manager v1.0</h1>
+<h1>The Forest Server Manager</h1>
 A server manager for the game "The Forest" designed and coded by Inforcer25
 
 <h2>Instructions</h2>
