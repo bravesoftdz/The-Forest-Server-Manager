@@ -2,24 +2,18 @@ program pTFSM;
 
 uses
   Vcl.Forms,
-  uTFSM in 'uTFSM.pas' {frmmain},
+  uTFSM in 'uTFSM.pas' {Form1},
   Vcl.Themes,
   Vcl.Styles,
-  uSettings in 'uSettings.pas' {frmsettings},
-  uInstaller in 'uInstaller.pas' {frminstaller},
-  uAbout in 'uAbout.pas' {frmabout},
-  uOxideModInstaller in 'uOxideModInstaller.pas' {frmoxidemod};
+  uOxideModInstaller in 'uOxideModInstaller.pas' {frmoxidemodinstaller};
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  TStyleManager.TrySetStyle('Amakrits');
-  Application.CreateForm(Tfrmmain, frmmain);
-  Application.CreateForm(Tfrmsettings, frmsettings);
-  Application.CreateForm(Tfrminstaller, frminstaller);
-  Application.CreateForm(Tfrmabout, frmabout);
-  Application.CreateForm(Tfrmoxidemod, frmoxidemod);
+  TStyleManager.TrySetStyle('Aqua Graphite');
+  Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(Tfrmoxidemodinstaller, frmoxidemodinstaller);
   Application.Run;
 end.

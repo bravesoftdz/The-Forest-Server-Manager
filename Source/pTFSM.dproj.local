@@ -6,22 +6,20 @@
     <Transaction>2017/04/29 23:28:16.000.401,=C:\Users\adria\OneDrive\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
     <Transaction>2017/05/04 20:12:45.000.882,=C:\Users\adria\OneDrive\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
     <Transaction>2017/05/05 13:42:58.000.747,=C:\Users\adria\OneDrive\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2017/05/06 21:38:21.000.755,=C:\Users\adria\OneDrive\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2017/05/06 21:39:14.000.543,C:\Users\adria\OneDrive\Documents\Embarcadero\Studio\Projects\Unit1.pas=C:\Users\adria\OneDrive\Documents\Embarcadero\Studio\Projects\The Forest Server Manager\uTFSM.pas</Transaction>
-    <Transaction>2017/05/06 21:39:14.000.543,C:\Users\adria\OneDrive\Documents\Embarcadero\Studio\Projects\Unit1.dfm=C:\Users\adria\OneDrive\Documents\Embarcadero\Studio\Projects\The Forest Server Manager\uTFSM.dfm</Transaction>
-    <Transaction>2017/05/06 21:39:22.000.078,C:\Users\adria\OneDrive\Documents\Embarcadero\Studio\Projects\Project1.dproj=C:\Users\adria\OneDrive\Documents\Embarcadero\Studio\Projects\The Forest Server Manager\pTFSM.dproj</Transaction>
-    <Transaction>2017/05/06 22:00:32.000.013,=C:\Users\adria\OneDrive\Documents\Embarcadero\Studio\Projects\The Forest Server Manager\Unit2.pas</Transaction>
-    <Transaction>2017/05/06 22:00:44.000.309,C:\Users\adria\OneDrive\Documents\Embarcadero\Studio\Projects\The Forest Server Manager\Unit2.dfm=C:\Users\adria\OneDrive\Documents\Embarcadero\Studio\Projects\The Forest Server Manager\uSettings.dfm</Transaction>
-    <Transaction>2017/05/06 22:00:44.000.309,C:\Users\adria\OneDrive\Documents\Embarcadero\Studio\Projects\The Forest Server Manager\Unit2.pas=C:\Users\adria\OneDrive\Documents\Embarcadero\Studio\Projects\The Forest Server Manager\uSettings.pas</Transaction>
-    <Transaction>2017/05/12 11:46:45.000.983,=C:\Users\adria\OneDrive\Documents\GitHub\The-Forest-Server-Manager\Source\Unit1.pas</Transaction>
-    <Transaction>2017/05/12 11:47:31.000.217,C:\Users\adria\OneDrive\Documents\GitHub\The-Forest-Server-Manager\Source\uInstaller.pas=C:\Users\adria\OneDrive\Documents\GitHub\The-Forest-Server-Manager\Source\Unit1.pas</Transaction>
-    <Transaction>2017/05/12 11:47:31.000.217,C:\Users\adria\OneDrive\Documents\GitHub\The-Forest-Server-Manager\Source\uInstaller.dfm=C:\Users\adria\OneDrive\Documents\GitHub\The-Forest-Server-Manager\Source\Unit1.dfm</Transaction>
-    <Transaction>2017/05/13 16:02:09.000.026,=C:\Users\adria\OneDrive\Documents\GitHub\The-Forest-Server-Manager\Source\Unit1.pas</Transaction>
-    <Transaction>2017/05/13 16:02:18.000.257,C:\Users\adria\OneDrive\Documents\GitHub\The-Forest-Server-Manager\Source\Unit1.dfm=C:\Users\adria\OneDrive\Documents\GitHub\The-Forest-Server-Manager\Source\uAbout.dfm</Transaction>
-    <Transaction>2017/05/13 16:02:18.000.257,C:\Users\adria\OneDrive\Documents\GitHub\The-Forest-Server-Manager\Source\Unit1.pas=C:\Users\adria\OneDrive\Documents\GitHub\The-Forest-Server-Manager\Source\uAbout.pas</Transaction>
-    <Transaction>2017/05/20 13:15:07.000.109,=C:\Users\adria\OneDrive\Documents\GitHub\The-Forest-Server-Manager\Source\Unit1.pas</Transaction>
-    <Transaction>2017/05/20 13:15:28.000.065,C:\Users\adria\OneDrive\Documents\GitHub\The-Forest-Server-Manager\Source\Unit1.dfm=C:\Users\adria\OneDrive\Documents\GitHub\The-Forest-Server-Manager\Source\uOxideModInstaller.dfm</Transaction>
-    <Transaction>2017/05/20 13:15:28.000.065,C:\Users\adria\OneDrive\Documents\GitHub\The-Forest-Server-Manager\Source\Unit1.pas=C:\Users\adria\OneDrive\Documents\GitHub\The-Forest-Server-Manager\Source\uOxideModInstaller.pas</Transaction>
+    <Transaction>2017/05/11 20:12:28.000.639,=C:\Users\adria\OneDrive\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/05/17 16:13:41.000.455,=C:\Users\adria\OneDrive\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/05/22 20:14:04.000.842,=C:\Users\adria\OneDrive\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/05/22 20:15:44.000.512,C:\Users\adria\OneDrive\Documents\Embarcadero\Studio\Projects\Unit1.dfm=C:\Users\adria\OneDrive\Documents\Embarcadero\Studio\Projects\The Forest Server Manager\uTFSM.dfm</Transaction>
+    <Transaction>2017/05/22 20:15:44.000.512,C:\Users\adria\OneDrive\Documents\Embarcadero\Studio\Projects\Unit1.pas=C:\Users\adria\OneDrive\Documents\Embarcadero\Studio\Projects\The Forest Server Manager\uTFSM.pas</Transaction>
+    <Transaction>2017/05/22 20:15:51.000.957,C:\Users\adria\OneDrive\Documents\Embarcadero\Studio\Projects\Project1.dproj=C:\Users\adria\OneDrive\Documents\Embarcadero\Studio\Projects\The Forest Server Manager\pTFSM.dproj</Transaction>
+    <Transaction>2017/05/24 09:57:33.000.332,=C:\Users\adria\Documents\Embarcadero\Studio\Projects\The Forest Server Manager\Unit2.pas</Transaction>
+    <Transaction>2017/05/24 09:57:47.000.898,C:\Users\adria\Documents\Embarcadero\Studio\Projects\The Forest Server Manager\Unit2.pas=C:\Users\adria\Documents\Embarcadero\Studio\Projects\The Forest Server Manager\uOxideModInstaller.pas</Transaction>
+    <Transaction>2017/05/24 09:57:47.000.898,C:\Users\adria\Documents\Embarcadero\Studio\Projects\The Forest Server Manager\Unit2.dfm=C:\Users\adria\Documents\Embarcadero\Studio\Projects\The Forest Server Manager\uOxideModInstaller.dfm</Transaction>
+    <Transaction>2017/05/24 10:33:16.000.988,=C:\Users\adria\Documents\Embarcadero\Studio\Projects\The Forest Server Manager\Unit2.pas</Transaction>
+    <Transaction>2017/05/24 10:34:57.000.467,C:\Users\adria\Documents\Embarcadero\Studio\Projects\The Forest Server Manager\uOxideModInstaller.pas=</Transaction>
+    <Transaction>2017/05/24 10:41:42.000.348,=C:\Users\adria\Documents\Embarcadero\Studio\Projects\The Forest Server Manager\Unit2.pas</Transaction>
+    <Transaction>2017/05/24 10:42:01.000.947,C:\Users\adria\Documents\Embarcadero\Studio\Projects\The Forest Server Manager\Unit2.pas=C:\Users\adria\Documents\Embarcadero\Studio\Projects\The Forest Server Manager\uOxideModInstaller.pas</Transaction>
+    <Transaction>2017/05/24 10:42:01.000.947,C:\Users\adria\Documents\Embarcadero\Studio\Projects\The Forest Server Manager\Unit2.dfm=C:\Users\adria\Documents\Embarcadero\Studio\Projects\The Forest Server Manager\uOxideModInstaller.dfm</Transaction>
   </Transactions>
 	<ActiveMobileDevice>
 		<NoProfile iOSSimulator="iPhone5"/>

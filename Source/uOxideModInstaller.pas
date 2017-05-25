@@ -11,12 +11,13 @@ type
 
   TDownload = class;
 
-  Tfrmoxidemod = class(TForm)
+  Tfrmoxidemodinstaller = class(TForm)
     lbl1: TLabel;
-    btn1: TButton;
     pb1: TProgressBar;
-    lblStatus: TLabel;
-    lbl2: TLabel;
+    btn1: TButton;
+    btn2: TButton;
+    lblstatus: TLabel;
+    procedure btn2Click(Sender: TObject);
     procedure btn1Click(Sender: TObject);
   private
     { Private declarations }
@@ -24,7 +25,7 @@ type
     { Public declarations }
   end;
 
-  TDownload = class (TThread)
+   TDownload = class (TThread)
   private
     httpclient: TIdHTTP;
     url: string;
@@ -46,7 +47,7 @@ type
   end;
 
 var
-  frmoxidemod: Tfrmoxidemod;
+  frmoxidemodinstaller: Tfrmoxidemodinstaller;
 
 implementation
 
@@ -95,12 +96,12 @@ procedure TDownload.UpdateProgressBar;
 var
   ZipFile: string;
 begin
-  frmoxidemod.pb1.Position := progressbarstatus;
-  frmoxidemod.lblStatus.Caption := 'Downloading...';
+  frmoxidemodinstaller.pb1.Position := progressbarstatus;
+  frmoxidemodinstaller.lblStatus.Caption := 'Downloading...';
 
-  if frmoxidemod.pb1.Position = frmoxidemod.pb1.Max then
+  if frmoxidemodinstaller.pb1.Position = frmoxidemodinstaller.pb1.Max then
     begin
-      frmoxidemod.lblStatus.Caption := 'Done Downloading. Installing...';
+      frmoxidemodinstaller.lblStatus.Caption := 'Done Downloading. Installing...';
       Sleep(2000);
       ExtractZip('oxide.zip', GetCurrentDir);
     end;
@@ -108,7 +109,7 @@ end;
 
 procedure TDownload.SetMaxProgressBar;
 begin
-  frmoxidemod.pb1.Max := maxprogressbar;
+  frmoxidemodinstaller.pb1.Max := maxprogressbar;
 end;
 
 destructor TDownload.Destroy;
@@ -119,7 +120,21 @@ end;
 
 { TForm1 }
 
-procedure Tfrmoxidemod.btn1Click(Sender: TObject);
+procedure TDownload.ExtractZip(ZipFile, ExtractPath: string);
+begin
+  if TZipFile.IsValid(ZipFile) then
+    begin
+      TZipFile.ExtractZipFile(ZipFile, ExtractPath);
+      frmoxidemodinstaller.lblStatus.Caption := 'Oxide Installed!';
+    end
+  else
+    begin
+      ShowMessage('Error installing oxide!');
+      frmoxidemodinstaller.lblStatus.Caption := 'Error Installing Oxide!';
+    end;
+end;
+
+procedure Tfrmoxidemodinstaller.btn1Click(Sender: TObject);
 var
   DownloadThread: TDownload;
   link: string;
@@ -130,18 +145,9 @@ begin
    DownloadThread.Start;
 end;
 
-procedure TDownload.ExtractZip(ZipFile, ExtractPath: string);
+procedure Tfrmoxidemodinstaller.btn2Click(Sender: TObject);
 begin
-  if TZipFile.IsValid(ZipFile) then
-    begin
-      TZipFile.ExtractZipFile(ZipFile, ExtractPath);
-      frmoxidemod.lblStatus.Caption := 'Oxide Installed!';
-    end
-  else
-    begin
-      ShowMessage('Error installing oxide!');
-      frmoxidemod.lblStatus.Caption := 'Error Installing Oxide!';
-    end;
+  Close;
 end;
 
 end.

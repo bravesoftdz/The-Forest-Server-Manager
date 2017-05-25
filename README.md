@@ -1,4 +1,4 @@
-<h1>The Forest Server Manager v0.7</h1>
+<h1>The Forest Server Manager v1.0</h1>
 A server manager for the game "The Forest" designed and coded by Inforcer25
 
 <h2>Instructions</h2>
@@ -6,25 +6,25 @@ Watch <a href="https://youtu.be/k73XwYgzims">Video Tutorial</a>
 <br/>
 or
 <br/>
-1. Download and extract steamcmd to anywhere
+1. Download and extract <a href="https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip">steamcmd</a> to anywhere
 <br/>
-2. Click on settings and browse to the folder where steamcmd is located then click save.
+2. Click on 'Application Settings' and browse to the folder where steamcmd is located then click save.
 <br/>
-3. Click Reload Everything
+3. Go to the installer page and click install
 <br/>
-4. Open the installer/updater and click install (The server will now be downloaded)
+4. Go to the server config and edit the config then click save
 <br/>
-5. After it's done you need to press Reload everything again and then start the server (Even if it gives you an error about the config)
+5. If you want to you can install oxidemod in at the installer page.
 <br/>
-6. Once again click Reload Everything
+6. Click start server
 <br/>
-7. Edit the config to how ever you like it and then start the server.
+7. Enjoy the server :D
 <br/>
 <br/>
 Note: You can close The Forest Server Manager after the server has started
 
 <h2>Download</h2>
-<a href="https://github.com/Inforcer25/The-Forest-Server-Manager/raw/master/The%20Forest%20Server%20Manager%20v0.7.exe">
+<a href="https://github.com/Inforcer25/The-Forest-Server-Manager/raw/master/The%20Forest%20Server%20Manager%20v1.0.exe">
   <img src="http://i.imgur.com/qoGP19r.png" alt="Download">
 </a>
 <br/>
@@ -38,9 +38,15 @@ Note: You can close The Forest Server Manager after the server has started
 
 <h2>Whats new?</h2>
 <ul>
-  <li>Fix for crash when installing oxidemod on some computers</li>
-  <li>Fix for starting the server in the background (Server Will start like it should)</li>
+  <li>Released v1.0!</li>
+  <li>Added Themes</li>
+  <li>You can now edit the config in a GUI</li>
+  <li>Automatically sets the server IP (IPv4)</li>
+  <li>Full Re-design</li>
+  <li>Added 'Links' (Plugins, SteamCMD, Check for updates)</li>
+  <li>A lot more fixes and its faster now!</li>
   <li>Added support for OxideMod</li>
+  <li>A lot more stuff I can't remember</li>
 </ul>
 
 <h2>Whats Broken?</h2>
@@ -57,9 +63,9 @@ Note: You can close The Forest Server Manager after the server has started
   <li>Windows Server 2008</li>
 </ul>
 <h2>Preview</h2> 
-<img src="http://i.imgur.com/VRe8lWg.png" alt="Preview">
-<img src="http://i.imgur.com/QfwFq26.png" alt="Preview">
-<img src="http://i.imgur.com/VCXxmaT.png" alt="Preview">
+<img src="http://i.imgur.com/tyogcWb.png" alt="Preview">
+<img src="http://i.imgur.com/NY27iFQ.png" alt="Preview">
+<img src="http://i.imgur.com/wh9y80q.png" alt="Preview">
 
 <h2>For Developers</h2>
 This was made & compiled with Rad Studio Tokyo 10.2
