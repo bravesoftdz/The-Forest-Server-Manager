@@ -80,7 +80,6 @@ type
     Checkforupdates1: TMenuItem;
     cbbthemelist: TComboBox;
     SteamCMD1: TMenuItem;
-    btn13: TButton;
     procedure btn2MouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure btn2MouseUp(Sender: TObject; Button: TMouseButton;
@@ -426,8 +425,8 @@ end;
 procedure TForm1.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   KillTask('steamcmd.exe');
-  btn5.Click;
-  btn7.Click;
+ // btn5.Click;
+ // btn7.Click;
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
@@ -538,10 +537,6 @@ begin
     begin
       ini := TIniFile.Create(ini_serverconfig);
       try
-        maxplayers := '8';
-        autosave := '30';
-        saveslot := '1';
-
         steamport := ini.ReadString('Server Config', 'serverSteamPort', '8766');
         gameport := ini.ReadString('Server Config', 'serverGamePort', '27015');
         queryport := ini.ReadString('Server Config', 'serverQueryPort', '27016');
@@ -589,7 +584,7 @@ begin
 
         steamcmdpath := ini.ReadString('Locations', 'SteamCMD', steamcmdpath);
         lbledtsteamcmdpath.Text := steamcmdpath;
-        AlphaBlendValue := StrToInt(ini.ReadString('Transparency', 'AlphaBlendValue', ''));
+        AlphaBlendValue := StrToInt(ini.ReadString('Transparency', 'AlphaBlendValue', '255'));
         trckbr1.Position := AlphaBlendValue;
 
         TStyleManager.SetStyle(ini.ReadString('Application Settings', 'Theme', cbbthemelist.Items[cbbthemelist.ItemIndex]));

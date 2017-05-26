@@ -5,7 +5,7 @@ object Form1: TForm1
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   Caption = 'The Forest Server Manager'
-  ClientHeight = 573
+  ClientHeight = 567
   ClientWidth = 892
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -5141,10 +5141,10 @@ object Form1: TForm1
     Left = 0
     Top = 81
     Width = 179
-    Height = 492
+    Height = 486
     Align = alLeft
     TabOrder = 1
-    ExplicitHeight = 466
+    ExplicitHeight = 470
     object lbl13: TLabel
       Left = 16
       Top = 400
@@ -5157,7 +5157,7 @@ object Form1: TForm1
       Top = 425
       Width = 31
       Height = 19
-      Caption = 'v1.0'
+      Caption = 'v1.2'
     end
     object btn1: TButton
       Left = 16
@@ -5178,27 +5178,19 @@ object Form1: TForm1
       State = cbChecked
       TabOrder = 1
     end
-    object btn13: TButton
-      Left = 72
-      Top = 216
-      Width = 75
-      Height = 25
-      Caption = 'btn13'
-      TabOrder = 2
-    end
   end
   object pgc1: TPageControl
     Left = 179
     Top = 81
     Width = 713
-    Height = 492
+    Height = 486
     ActivePage = tsconfig
     Align = alClient
     TabOrder = 2
-    ExplicitHeight = 466
+    ExplicitHeight = 470
     object tsconfig: TTabSheet
       Caption = 'Server Config'
-      ExplicitHeight = 432
+      ExplicitHeight = 436
       object lbl1: TLabel
         Left = 16
         Top = 24
@@ -5523,7 +5515,7 @@ object Form1: TForm1
     object tssettings: TTabSheet
       Caption = 'Application Settings'
       ImageIndex = 1
-      ExplicitHeight = 432
+      ExplicitHeight = 436
       object grp3: TGroupBox
         Left = 16
         Top = 16
@@ -5625,15 +5617,15 @@ object Form1: TForm1
     object tsinstaller: TTabSheet
       Caption = 'Server Installer/Updater'
       ImageIndex = 2
-      ExplicitHeight = 432
+      ExplicitHeight = 460
       object pnl4: TPanel
         Left = 0
         Top = 0
         Width = 137
-        Height = 458
+        Height = 452
         Align = alLeft
         TabOrder = 0
-        ExplicitHeight = 432
+        ExplicitHeight = 460
         object btn8: TButton
           Left = 2
           Top = 17
@@ -5684,7 +5676,7 @@ object Form1: TForm1
         Left = 137
         Top = 0
         Width = 568
-        Height = 458
+        Height = 452
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -5695,7 +5687,7 @@ object Form1: TForm1
         ReadOnly = True
         TabOrder = 1
         OnChange = mmoinstallerChange
-        ExplicitHeight = 432
+        ExplicitHeight = 460
       end
     end
   end
