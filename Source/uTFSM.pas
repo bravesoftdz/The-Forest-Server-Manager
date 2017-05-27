@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.ExtCtrls,
   Vcl.StdCtrls, DosCommand, Vcl.Samples.Spin, ShellAPI, WinSock, IniFiles,
-  FileCtrl, Vcl.Menus, Tlhelp32, uOxideModInstaller, Vcl.Themes;
+  FileCtrl, Vcl.Menus, Tlhelp32, uOxideModInstaller, uSteamCMDinstaller, Vcl.Themes, ClipBrd;
 
 type
   TForm1 = class(TForm)
@@ -44,9 +44,6 @@ type
     lbledtgameport: TLabeledEdit;
     lbledtqueryport: TLabeledEdit;
     btn5: TButton;
-    grp3: TGroupBox;
-    lbledtsteamcmdpath: TLabeledEdit;
-    btn6: TButton;
     grp4: TGroupBox;
     trckbr1: TTrackBar;
     grp5: TGroupBox;
@@ -57,7 +54,6 @@ type
     sesaveslot: TSpinEdit;
     btn7: TButton;
     chkwithoutsteam: TCheckBox;
-    lblsteamcmdstatus: TLabel;
     lblipv4: TLabel;
     mm1: TMainMenu;
     utorials1: TMenuItem;
@@ -72,14 +68,16 @@ type
     btn10: TButton;
     btn11: TButton;
     dscmnd1: TDosCommand;
-    btn12: TButton;
+    btncancel: TButton;
     lbl13: TLabel;
     lbl14: TLabel;
     Links1: TMenuItem;
     GetOxidePlugins1: TMenuItem;
     Checkforupdates1: TMenuItem;
     cbbthemelist: TComboBox;
-    SteamCMD1: TMenuItem;
+    btn13: TButton;
+    btn12: TButton;
+    lbl15: TLabel;
     procedure btn2MouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure btn2MouseUp(Sender: TObject; Button: TMouseButton;
@@ -99,9 +97,7 @@ type
     function GetLocalIP: string;
     procedure FormCreate(Sender: TObject);
     procedure LoadServerConfig;
-    procedure btn6Click(Sender: TObject);
     procedure btn7Click(Sender: TObject);
-    procedure lbledtsteamcmdpathChange(Sender: TObject);
     procedure btn1Click(Sender: TObject);
     procedure btn8Click(Sender: TObject);
     procedure btn9Click(Sender: TObject);
@@ -109,7 +105,7 @@ type
     function KillTask(ExeFileName: string): Integer;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btn10Click(Sender: TObject);
-    procedure btn12Click(Sender: TObject);
+    procedure btncancelClick(Sender: TObject);
     procedure btn11Click(Sender: TObject);
     procedure Video1Click(Sender: TObject);
     procedure ext1Click(Sender: TObject);
@@ -117,7 +113,8 @@ type
     procedure GetOxidePlugins1Click(Sender: TObject);
     procedure Checkforupdates1Click(Sender: TObject);
     procedure cbbthemelistChange(Sender: TObject);
-    procedure SteamCMD1Click(Sender: TObject);
+    procedure btn13Click(Sender: TObject);
+    procedure btn12Click(Sender: TObject);
   private
     //
   public
@@ -135,22 +132,28 @@ procedure TForm1.btn10Click(Sender: TObject);
 var
   command: TStringList;
 begin
-  dscmnd1.Stop;
-  command:= TStringlist.create;
-  try
-    command.Clear;
-    command.Add('@echo off');
-    command.Add('echo Starting Validation DO NOT CLOSE THIS WINDOW!');
-    command.Add(steamcmdpath + '\steamcmd.exe +login anonymous +force_install_dir "' + GetCurrentDir + '" +app_update 556450 validate +quit');
-    command.Add('echo Done');
-    command.SaveToFile('UpdateInstall.bat');
-  finally
-    command.Free
-  end;
+  if FileExists('.\steamcmd\steamcmd.exe') then
+    begin
+      btncancel.Click;
+      dscmnd1.Stop;
+      command:= TStringlist.create;
+      try
+        command.Clear;
+        command.Add('@echo off');
+        command.Add('echo Starting Validation DO NOT CLOSE THIS WINDOW!');
+        command.Add('.\steamcmd' + '\steamcmd.exe +login anonymous +force_install_dir "' + GetCurrentDir + '" +app_update 556450 validate +quit');
+        command.Add('echo Done');
+        command.SaveToFile('UpdateInstall.bat');
+      finally
+        command.Free
+      end;
 
-  dscmnd1.CommandLine := 'UpdateInstall.bat';
-  dscmnd1.OutputLines := mmoinstaller.Lines;
-  dscmnd1.Execute;
+      dscmnd1.CommandLine := 'UpdateInstall.bat';
+      dscmnd1.OutputLines := mmoinstaller.Lines;
+      dscmnd1.Execute;
+    end
+  else
+    ShowMessage('It seems that steamcmd is not installed. Please click Install SteamCMD below');
 end;
 
 procedure TForm1.btn11Click(Sender: TObject);
@@ -160,10 +163,20 @@ end;
 
 procedure TForm1.btn12Click(Sender: TObject);
 begin
+  frmsteamcmdinstaller.ShowModal;
+end;
+
+procedure TForm1.btncancelClick(Sender: TObject);
+begin
   dscmnd1.Stop;
   KillTask('steamcmd.exe');
   mmoinstaller.Lines.Clear;
   mmoinstaller.Lines.Add('stopped')
+end;
+
+procedure TForm1.btn13Click(Sender: TObject);
+begin
+  mmoinstaller.Lines.SaveToFile('installer-log.log');
 end;
 
 procedure TForm1.btn1Click(Sender: TObject);
@@ -340,22 +353,12 @@ begin
   ShowMessage('Config has been saved');
 end;
 
-procedure TForm1.btn6Click(Sender: TObject);
-begin
-  if SelectDirectory('Select your steamcmd dir', '', steamcmdpath) then
-    begin
-      lbledtsteamcmdpath.Text := steamcmdpath;
-    end;
-
-end;
-
 procedure TForm1.btn7Click(Sender: TObject);
 var
   ini : TIniFile;
 begin
   ini := TIniFile.Create(ini_serverconfig);
   try
-    ini.WriteString('Locations', 'SteamCMD', steamcmdpath);
     ini.WriteString('Transparency', 'AlphaBlendValue', IntToStr(AlphaBlendValue));
     ini.WriteString('Application Settings', 'Theme', cbbthemelist.Items[cbbthemelist.ItemIndex]);
   finally
@@ -367,44 +370,56 @@ procedure TForm1.btn8Click(Sender: TObject);
 var
   command: TStringList;
 begin
-  dscmnd1.Stop;
-  command:= TStringlist.create;
-  try
-    command.Clear;
-    command.Add('@echo off');
-    command.Add('echo Starting Installation...');
-    command.Add(steamcmdpath + '\steamcmd.exe +login anonymous +force_install_dir "' + GetCurrentDir + '" +app_update 556450 +quit');
-    command.Add('echo Done');
-    command.SaveToFile('UpdateInstall.bat');
-  finally
-    command.Free
-  end;
+  if FileExists('.\steamcmd\steamcmd.exe') then
+    begin
+      btncancel.Click;
+      dscmnd1.Stop;
+      command:= TStringlist.create;
+      try
+        command.Clear;
+        command.Add('@echo off');
+        command.Add('echo Starting Installation...');
+        command.Add('.\steamcmd' + '\steamcmd.exe +login anonymous +force_install_dir "' + GetCurrentDir + '" +app_update 556450 +quit');
+        command.Add('echo Done');
+        command.SaveToFile('UpdateInstall.bat');
+      finally
+        command.Free
+      end;
 
-  dscmnd1.CommandLine := 'UpdateInstall.bat';
-  dscmnd1.OutputLines := mmoinstaller.Lines;
-  dscmnd1.Execute;
+      dscmnd1.CommandLine := 'UpdateInstall.bat';
+      dscmnd1.OutputLines := mmoinstaller.Lines;
+      dscmnd1.Execute;
+    end
+  else
+    ShowMessage('It seems that steamcmd is not installed. Please click Install SteamCMD below');
 end;
 
 procedure TForm1.btn9Click(Sender: TObject);
 var
   command: TStringList;
 begin
-  dscmnd1.Stop;
-  command:= TStringlist.create;
-  try
-    command.Clear;
-    command.Add('@echo off');
-    command.Add('echo Starting Update...');
-    command.Add(steamcmdpath + '\steamcmd.exe +login anonymous +force_install_dir "' + GetCurrentDir + '" +app_update 556450 +quit');
-    command.Add('echo Done');
-    command.SaveToFile('UpdateInstall.bat');
-  finally
-    command.Free
-  end;
+  if FileExists('.\steamcmd\steamcmd.exe') then
+    begin
+      btncancel.Click;
+      dscmnd1.Stop;
+      command:= TStringlist.create;
+      try
+        command.Clear;
+        command.Add('@echo off');
+        command.Add('echo Starting Update...');
+        command.Add('.\steamcmd' + '\steamcmd.exe +login anonymous +force_install_dir "' + GetCurrentDir + '" +app_update 556450 +quit');
+        command.Add('echo Done');
+        command.SaveToFile('UpdateInstall.bat');
+      finally
+        command.Free
+      end;
 
-  dscmnd1.CommandLine := 'UpdateInstall.bat';
-  dscmnd1.OutputLines := mmoinstaller.Lines;
-  dscmnd1.Execute;
+      dscmnd1.CommandLine := 'UpdateInstall.bat';
+      dscmnd1.OutputLines := mmoinstaller.Lines;
+      dscmnd1.Execute;
+    end
+  else
+    ShowMessage('It seems that steamcmd is not installed. Please click Install SteamCMD below');
 end;
 
 procedure TForm1.cbbthemelistChange(Sender: TObject);
@@ -414,7 +429,7 @@ end;
 
 procedure TForm1.Checkforupdates1Click(Sender: TObject);
 begin
-  OpenURL('https://inforcer25.github.io/The-Forest-Server-Manager/');
+  OpenURL('https://github.com/Inforcer25/The-Forest-Server-Manager/releases');
 end;
 
 procedure TForm1.ext1Click(Sender: TObject);
@@ -425,6 +440,7 @@ end;
 procedure TForm1.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   KillTask('steamcmd.exe');
+  btncancel.Click;
  // btn5.Click;
  // btn7.Click;
 end;
@@ -433,6 +449,10 @@ procedure TForm1.FormCreate(Sender: TObject);
 var
   stylename: string;
 begin
+  Application.Title := 'The Forest Server Manager';
+  Height := 595;
+  Width := 910;
+
     if DirectoryExists(GetEnvironmentVariable('USERPROFILE') + '\AppData\LocalLow\SKS\TheForestDedicatedServer\ds') then
     serverconfig := GetEnvironmentVariable('USERPROFILE') + '\AppData\LocalLow\SKS\TheForestDedicatedServer\ds\Server.cfg'
   else
@@ -442,7 +462,6 @@ begin
     end;
 
   ini_serverconfig := GetEnvironmentVariable('APPDATA') + '\TheForestServerManager\serverconfig.ini';
-  Application.Title := 'The Forest Server Manager';
 
   lblipv4.Caption := 'IPv4: ' + GetLocalIP;
 
@@ -514,15 +533,9 @@ end;
 
 procedure TForm1.lbl10Click(Sender: TObject);
 begin
+  ShowMessage('The appid for The Forest is 242760. It has been copied to your clipboard');
+  Clipboard.AsText := '242760';
   OpenURL('https://steamcommunity.com/dev/managegameservers');
-end;
-
-procedure TForm1.lbledtsteamcmdpathChange(Sender: TObject);
-begin
-  if FileExists(steamcmdpath + '\steamcmd.exe') then
-    lblsteamcmdstatus.Caption := 'Found steamcmd.exe'
-  else
-    lblsteamcmdstatus.Caption := 'Could not find steamcmd.exe';
 end;
 
 procedure TForm1.LoadServerConfig;
@@ -582,8 +595,7 @@ begin
           chklog.Checked := False;
         lbledtserveremail.Text := email;
 
-        steamcmdpath := ini.ReadString('Locations', 'SteamCMD', steamcmdpath);
-        lbledtsteamcmdpath.Text := steamcmdpath;
+        steamcmdpath := '.\steamcmd';
         AlphaBlendValue := StrToInt(ini.ReadString('Transparency', 'AlphaBlendValue', '255'));
         trckbr1.Position := AlphaBlendValue;
 
@@ -620,11 +632,6 @@ end;
 procedure TForm1.ReportaBUG1Click(Sender: TObject);
 begin
   OpenURL('https://github.com/Inforcer25/The-Forest-Server-Manager/issues');
-end;
-
-procedure TForm1.SteamCMD1Click(Sender: TObject);
-begin
-  OpenURL('https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip');
 end;
 
 procedure TForm1.trckbr1Change(Sender: TObject);

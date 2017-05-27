@@ -5,7 +5,7 @@ object Form1: TForm1
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   Caption = 'The Forest Server Manager'
-  ClientHeight = 567
+  ClientHeight = 499
   ClientWidth = 892
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -5141,10 +5141,9 @@ object Form1: TForm1
     Left = 0
     Top = 81
     Width = 179
-    Height = 486
+    Height = 418
     Align = alLeft
     TabOrder = 1
-    ExplicitHeight = 470
     object lbl13: TLabel
       Left = 16
       Top = 400
@@ -5157,7 +5156,21 @@ object Form1: TForm1
       Top = 425
       Width = 31
       Height = 19
-      Caption = 'v1.2'
+      Caption = 'v1.4'
+    end
+    object lbl15: TLabel
+      Left = 16
+      Top = 120
+      Width = 137
+      Height = 48
+      Caption = 'Check for updates daily! This program is still in development'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      WordWrap = True
     end
     object btn1: TButton
       Left = 16
@@ -5183,14 +5196,12 @@ object Form1: TForm1
     Left = 179
     Top = 81
     Width = 713
-    Height = 486
+    Height = 418
     ActivePage = tsconfig
     Align = alClient
     TabOrder = 2
-    ExplicitHeight = 470
     object tsconfig: TTabSheet
       Caption = 'Server Config'
-      ExplicitHeight = 436
       object lbl1: TLabel
         Left = 16
         Top = 24
@@ -5492,8 +5503,8 @@ object Form1: TForm1
         end
       end
       object btn5: TButton
-        Left = 552
-        Top = 352
+        Left = 565
+        Top = 355
         Width = 137
         Height = 64
         Caption = 'Save Config'
@@ -5502,7 +5513,7 @@ object Form1: TForm1
       end
       object lbledtserveremail: TLabeledEdit
         Left = 183
-        Top = 388
+        Top = 389
         Width = 329
         Height = 27
         EditLabel.Width = 89
@@ -5515,71 +5526,17 @@ object Form1: TForm1
     object tssettings: TTabSheet
       Caption = 'Application Settings'
       ImageIndex = 1
-      ExplicitHeight = 436
-      object grp3: TGroupBox
-        Left = 16
-        Top = 16
-        Width = 673
-        Height = 105
-        Caption = 'SteamCMD'
-        TabOrder = 0
-        object lblsteamcmdstatus: TLabel
-          Left = 16
-          Top = 78
-          Width = 36
-          Height = 16
-          Caption = 'Status'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-        end
-        object lbledtsteamcmdpath: TLabeledEdit
-          Left = 16
-          Top = 48
-          Width = 610
-          Height = 24
-          EditLabel.Width = 141
-          EditLabel.Height = 19
-          EditLabel.Caption = 'SteamCMD Location'
-          EditLabel.Font.Charset = DEFAULT_CHARSET
-          EditLabel.Font.Color = clWindowText
-          EditLabel.Font.Height = -16
-          EditLabel.Font.Name = 'Tahoma'
-          EditLabel.Font.Style = []
-          EditLabel.ParentFont = False
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-          TabOrder = 0
-          OnChange = lbledtsteamcmdpathChange
-        end
-        object btn6: TButton
-          Left = 632
-          Top = 46
-          Width = 33
-          Height = 25
-          Caption = '...'
-          TabOrder = 1
-          OnClick = btn6Click
-        end
-      end
       object grp4: TGroupBox
         Left = 16
-        Top = 136
-        Width = 673
+        Top = 16
+        Width = 329
         Height = 105
         Caption = 'Transparency'
-        TabOrder = 1
+        TabOrder = 0
         object trckbr1: TTrackBar
           Left = 16
           Top = 40
-          Width = 641
+          Width = 297
           Height = 45
           Max = 255
           Min = 200
@@ -5589,12 +5546,12 @@ object Form1: TForm1
         end
       end
       object grp5: TGroupBox
-        Left = 16
-        Top = 264
+        Left = 360
+        Top = 16
         Width = 329
         Height = 105
         Caption = 'Theme'
-        TabOrder = 2
+        TabOrder = 1
         object cbbthemelist: TComboBox
           Left = 16
           Top = 40
@@ -5610,25 +5567,23 @@ object Form1: TForm1
         Width = 137
         Height = 73
         Caption = 'Save'
-        TabOrder = 3
+        TabOrder = 2
         OnClick = btn7Click
       end
     end
     object tsinstaller: TTabSheet
       Caption = 'Server Installer/Updater'
       ImageIndex = 2
-      ExplicitHeight = 460
       object pnl4: TPanel
         Left = 0
-        Top = 0
-        Width = 137
-        Height = 452
-        Align = alLeft
+        Top = 51
+        Width = 705
+        Height = 333
+        Align = alClient
         TabOrder = 0
-        ExplicitHeight = 460
         object btn8: TButton
           Left = 2
-          Top = 17
+          Top = 6
           Width = 129
           Height = 57
           Caption = 'Install'
@@ -5636,8 +5591,8 @@ object Form1: TForm1
           OnClick = btn8Click
         end
         object btn9: TButton
-          Left = 2
-          Top = 80
+          Left = 154
+          Top = 6
           Width = 129
           Height = 57
           Caption = 'Update'
@@ -5645,8 +5600,8 @@ object Form1: TForm1
           OnClick = btn9Click
         end
         object btn10: TButton
-          Left = 2
-          Top = 143
+          Left = 306
+          Top = 6
           Width = 129
           Height = 57
           Caption = 'Validate'
@@ -5655,39 +5610,56 @@ object Form1: TForm1
         end
         object btn11: TButton
           Left = 2
-          Top = 206
+          Top = 166
           Width = 129
           Height = 57
           Caption = 'Install OxideMod'
           TabOrder = 3
           OnClick = btn11Click
         end
-        object btn12: TButton
-          Left = 2
-          Top = 359
-          Width = 129
+        object btncancel: TButton
+          Left = 608
+          Top = 6
+          Width = 91
           Height = 57
           Caption = 'Cancel'
           TabOrder = 4
+          OnClick = btncancelClick
+        end
+        object btn13: TButton
+          Left = 458
+          Top = 6
+          Width = 129
+          Height = 57
+          Caption = 'Export log'
+          TabOrder = 5
+          OnClick = btn13Click
+        end
+        object btn12: TButton
+          Left = 2
+          Top = 86
+          Width = 129
+          Height = 57
+          Caption = 'Install SteamCMD'
+          TabOrder = 6
           OnClick = btn12Click
         end
       end
       object mmoinstaller: TMemo
-        Left = 137
+        Left = 0
         Top = 0
-        Width = 568
-        Height = 452
-        Align = alClient
+        Width = 705
+        Height = 51
+        Align = alTop
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -13
+        Font.Height = -16
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
         ReadOnly = True
         TabOrder = 1
         OnChange = mmoinstallerChange
-        ExplicitHeight = 460
       end
     end
   end
@@ -5718,10 +5690,6 @@ object Form1: TForm1
       object Checkforupdates1: TMenuItem
         Caption = 'Check for updates'
         OnClick = Checkforupdates1Click
-      end
-      object SteamCMD1: TMenuItem
-        Caption = 'SteamCMD'
-        OnClick = SteamCMD1Click
       end
     end
   end

@@ -56,7 +56,7 @@ object frmoxidemodinstaller: Tfrmoxidemodinstaller
     Top = 88
     Width = 113
     Height = 49
-    Caption = 'Cancel'
+    Caption = 'Close'
     TabOrder = 2
     OnClick = btn2Click
   end
