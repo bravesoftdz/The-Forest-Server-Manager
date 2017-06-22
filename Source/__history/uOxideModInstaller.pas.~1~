@@ -126,7 +126,6 @@ begin
     begin
       TZipFile.ExtractZipFile(ZipFile, ExtractPath);
       frmoxidemodinstaller.lblStatus.Caption := 'Oxide Installed!';
-      DeleteFile(ZipFile);
     end
   else
     begin
@@ -140,10 +139,10 @@ var
   DownloadThread: TDownload;
   link: string;
 begin
-  link := 'http://41.185.91.51/RSM/Oxide-Rust.zip';
-  DownloadThread := TDownload.Create(true, link, 'oxide.zip');
-  DownloadThread.FreeOnTerminate:=true;
-  DownloadThread.Start;
+  link := 'http://41.185.91.51/TFSM/Oxide-TheForest.zip';
+   DownloadThread := TDownload.Create(true, link, 'oxide.zip');
+   DownloadThread.FreeOnTerminate:=true;
+   DownloadThread.Start;
 end;
 
 procedure Tfrmoxidemodinstaller.btn2Click(Sender: TObject);

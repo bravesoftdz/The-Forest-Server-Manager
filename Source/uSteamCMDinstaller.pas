@@ -116,6 +116,7 @@ begin
         begin
           TZipFile.ExtractZipFile(ZipFile, ExtractPath);
           frmsteamcmdinstaller.lblStatus.Caption := 'SteamCMD Installed!';
+          DeleteFile(ZipFile);
         end
       else
         begin
@@ -130,6 +131,7 @@ begin
         begin
           TZipFile.ExtractZipFile(ZipFile, ExtractPath);
           frmsteamcmdinstaller.lblStatus.Caption := 'SteamCMD Installed!';
+          DeleteFile(ZipFile);
         end
       else
         begin

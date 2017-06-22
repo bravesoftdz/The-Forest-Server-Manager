@@ -1,4 +1,4 @@
-unit uOxideModInstaller;
+unit uMultiDownloader;
 
 interface
 
@@ -11,7 +11,7 @@ type
 
   TDownload = class;
 
-  Tfrmoxidemodinstaller = class(TForm)
+  Tfrmmultidownloader = class(TForm)
     lbl1: TLabel;
     pb1: TProgressBar;
     btn1: TButton;
@@ -23,6 +23,7 @@ type
     { Private declarations }
   public
     { Public declarations }
+    multilink: string;
   end;
 
    TDownload = class (TThread)
@@ -47,7 +48,7 @@ type
   end;
 
 var
-  frmoxidemodinstaller: Tfrmoxidemodinstaller;
+  frmmultidownloader: Tfrmmultidownloader;
 
 implementation
 
@@ -70,7 +71,6 @@ procedure TDownload.idhttp1Work(ASender: TObject; AWorkMode: TWorkMode;
 begin
   progressbarstatus := AWorkCount;
   Queue(UpdateProgressBar);
-
 end;
 
 procedure TDownload.idhttp1WorkBegin(ASender: TObject; AWorkMode: TWorkMode;
@@ -96,20 +96,20 @@ procedure TDownload.UpdateProgressBar;
 var
   ZipFile: string;
 begin
-  frmoxidemodinstaller.pb1.Position := progressbarstatus;
-  frmoxidemodinstaller.lblStatus.Caption := 'Downloading...';
+  frmmultidownloader.pb1.Position := progressbarstatus;
+  frmmultidownloader.lblStatus.Caption := 'Downloading...';
 
-  if frmoxidemodinstaller.pb1.Position = frmoxidemodinstaller.pb1.Max then
+  if frmmultidownloader.pb1.Position = frmmultidownloader.pb1.Max then
     begin
-      frmoxidemodinstaller.lblStatus.Caption := 'Done Downloading. Installing...';
+      frmmultidownloader.lblStatus.Caption := 'Done Downloading.';
       Sleep(2000);
-      ExtractZip('oxide.zip', GetCurrentDir);
+      ExtractZip('download.zip', GetCurrentDir);
     end;
 end;
 
 procedure TDownload.SetMaxProgressBar;
 begin
-  frmoxidemodinstaller.pb1.Max := maxprogressbar;
+  frmmultidownloader.pb1.Max := maxprogressbar;
 end;
 
 destructor TDownload.Destroy;
@@ -125,28 +125,28 @@ begin
   if TZipFile.IsValid(ZipFile) then
     begin
       TZipFile.ExtractZipFile(ZipFile, ExtractPath);
-      frmoxidemodinstaller.lblStatus.Caption := 'Oxide Installed!';
+      frmmultidownloader.lblStatus.Caption := 'Downloaded!';
       DeleteFile(ZipFile);
     end
   else
     begin
-      ShowMessage('Error installing oxide!');
-      frmoxidemodinstaller.lblStatus.Caption := 'Error Installing Oxide!';
+      ShowMessage('Error downloading!');
+      frmmultidownloader.lblStatus.Caption := 'Error downloading!';
     end;
 end;
 
-procedure Tfrmoxidemodinstaller.btn1Click(Sender: TObject);
+procedure Tfrmmultidownloader.btn1Click(Sender: TObject);
 var
   DownloadThread: TDownload;
   link: string;
 begin
-  link := 'http://41.185.91.51/RSM/Oxide-Rust.zip';
-  DownloadThread := TDownload.Create(true, link, 'oxide.zip');
+  link := multilink;
+  DownloadThread := TDownload.Create(true, link, 'download.zip');
   DownloadThread.FreeOnTerminate:=true;
   DownloadThread.Start;
 end;
 
-procedure Tfrmoxidemodinstaller.btn2Click(Sender: TObject);
+procedure Tfrmmultidownloader.btn2Click(Sender: TObject);
 begin
   Close;
 end;
