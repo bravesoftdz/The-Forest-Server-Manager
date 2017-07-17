@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2017/07/07 20:35:16.000.719,=C:\Users\adria\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/07/12 08:44:32.000.872,=C:\Users\adria\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/07/12 08:45:08.000.037,C:\Users\adria\OneDrive\Projects (Delphi)\The Forest Server Manager\uTFSM.pas=C:\Users\adria\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/07/12 08:45:08.000.037,C:\Users\adria\OneDrive\Projects (Delphi)\The Forest Server Manager\uTFSM.dfm=C:\Users\adria\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2017/07/12 08:45:14.000.212,C:\Users\adria\OneDrive\Projects (Delphi)\The Forest Server Manager\pTFSM.dproj=C:\Users\adria\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2017/07/12 09:48:28.000.004,=C:\Users\adria\OneDrive\Projects (Delphi)\The Forest Server Manager\uDownload.pas</Transaction>
+    <Transaction>2017/07/12 10:15:08.000.865,=C:\Users\adria\OneDrive\Projects (Delphi)\The Forest Server Manager\uSteamCMDinstaller.pas</Transaction>
+    <Transaction>2017/07/12 11:51:21.000.902,=C:\Users\adria\OneDrive\Projects (Delphi)\The Forest Server Manager\uOxideModInstaller.pas</Transaction>
+  </Transactions>
+</BorlandProject>
