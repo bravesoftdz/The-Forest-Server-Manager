@@ -1,29 +1,25 @@
-unit uOxideModInstaller;
+unit uSteamCMDinstaller;
 
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
-  System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.ComCtrls,
-  Vcl.StdCtrls, IdBaseComponent, IdComponent,
-  IdTCPConnection, IdTCPClient, IdHTTP, System.Zip, ActiveX,
-  IdSSLOpenSSL;
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.StdCtrls, IdBaseComponent, IdComponent,
+  IdTCPConnection, IdTCPClient, IdHTTP, System.Zip, ActiveX, IdSSLOpenSSL;
 
 type
 
   TDownload = class;
 
-  Tfrmoxidemodinstaller = class(TForm)
+  Tfrmsteamcmdinstaller = class(TForm)
     pb1: TProgressBar;
-    btn1: TButton;
     procedure FormShow(Sender: TObject);
-    procedure btn1Click(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
   end;
+
 
   TDownload = class(TThread)
   private
@@ -47,11 +43,12 @@ type
   end;
 
 var
-  frmoxidemodinstaller: Tfrmoxidemodinstaller;
+  frmsteamcmdinstaller: Tfrmsteamcmdinstaller;
 
 implementation
 
 {$R *.dfm}
+
 { Thread }
 
 constructor TDownload.Create(CreateSuspended: boolean; aurl, afilename: string);
@@ -89,9 +86,9 @@ begin
   try
     httpclient.Get(url, Stream);
     Stream.SaveToFile(filename);
-    frmoxidemodinstaller.Caption := 'Done Downloading. Extracting...';
-    //Sleep(2000);
-    ExtractZip('oxide.zip', GetCurrentDir);
+    frmsteamcmdinstaller.Caption := 'Done Downloading. Extracting...';
+    ForceDirectories('.\steamcmd');
+    ExtractZip('steamcmd.zip', '.\steamcmd');
   finally
     Stream.Free;
   end;
@@ -101,20 +98,13 @@ procedure TDownload.UpdateProgressBar;
 var
   ZipFile: string;
 begin
-  frmoxidemodinstaller.pb1.Position := progressbarstatus;
-  frmoxidemodinstaller.Caption := 'Downloading...';
-
- { if frmextradownload.pb1.Position = frmextradownload.pb1.Max then
-  begin
-    frmextradownload.Caption := 'Done Downloading. Extracting...';
-    Sleep(2000);
-    ExtractZip('files.zip', GetCurrentDir);
-  end; }
+  frmsteamcmdinstaller.pb1.Position := progressbarstatus;
+  frmsteamcmdinstaller.Caption := 'Downloading...';
 end;
 
 procedure TDownload.SetMaxProgressBar;
 begin
-  frmoxidemodinstaller.pb1.Max := maxprogressbar;
+  frmsteamcmdinstaller.pb1.Max := maxprogressbar;
 end;
 
 destructor TDownload.Destroy;
@@ -129,32 +119,25 @@ begin
   begin
     TZipFile.ExtractZipFile(ZipFile, ExtractPath);
     DeleteFile(ZipFile);
-    DeleteFile('HashInfo.txt');
-    DeleteFile('OpenSSL License.txt');
-    DeleteFile('openssl.exe');
-    DeleteFile('ReadMe.txt');
-    frmoxidemodinstaller.Caption := 'Done.';
-    frmoxidemodinstaller.btn1.Enabled := True;
+    frmsteamcmdinstaller.Caption := 'Done.';
+    frmsteamcmdinstaller.Close;
   end
   else
   begin
-    frmoxidemodinstaller.Caption := 'Error Extracting files';
+    ShowMessage('There was some unknown error while downloading or extracting the files.');
+    frmsteamcmdinstaller.Close;
   end;
 end;
 
-procedure Tfrmoxidemodinstaller.btn1Click(Sender: TObject);
-begin
-  Close;
-end;
-
-procedure Tfrmoxidemodinstaller.FormShow(Sender: TObject);
-var
+procedure Tfrmsteamcmdinstaller.FormShow(Sender: TObject);
+  var
   DownloadThread: TDownload;
   link: string;
 begin
-  frmoxidemodinstaller.Caption := 'Starting Download...';
-  link := 'https://bintray.com/oxidemod/builds/download_file?file_path=Oxide-TheForest.zip';
-  DownloadThread := TDownload.Create(true, link, 'oxide.zip');
+  pb1.Position := 0;
+  frmsteamcmdinstaller.Caption := 'Starting Download...';
+  link := 'https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip';
+  DownloadThread := TDownload.Create(true, link, 'steamcmd.zip');
   DownloadThread.FreeOnTerminate := true;
   DownloadThread.Start;
 end;

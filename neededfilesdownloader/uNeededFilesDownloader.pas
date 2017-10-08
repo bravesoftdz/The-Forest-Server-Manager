@@ -1,18 +1,19 @@
-unit uDownload;
+unit uNeededFilesDownloader;
 
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.ComCtrls, IdBaseComponent, IdComponent,
-  IdTCPConnection, IdTCPClient, IdHTTP, System.Zip, ActiveX,
-  IdSSLOpenSSL;
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
+  Vcl.ComCtrls, IdBaseComponent, IdComponent,
+  IdTCPConnection, IdTCPClient, IdHTTP, System.Zip, ActiveX;
 
 type
 
   TDownload = class;
 
-  Tfrmextradownload = class(TForm)
+  Tfrmneededdownload = class(TForm)
     btn1: TButton;
     pnl1: TPanel;
     pb1: TProgressBar;
@@ -24,7 +25,7 @@ type
     { Public declarations }
   end;
 
-   TDownload = class(TThread)
+  TDownload = class(TThread)
   private
     httpclient: TIdHTTP;
     url: string;
@@ -46,12 +47,11 @@ type
   end;
 
 var
-  frmextradownload: Tfrmextradownload;
+  frmneededdownload: Tfrmneededdownload;
 
 implementation
 
 {$R *.dfm}
-
 { TDownload }
 
 constructor TDownload.Create(CreateSuspended: boolean; aurl, afilename: string);
@@ -89,42 +89,39 @@ begin
     Stream.SaveToFile(filename);
   finally
     Stream.Free;
-    frmextradownload.Caption := 'Done Downloading. Extracting...';
+    frmneededdownload.Caption := 'Done Downloading. Extracting...';
     Sleep(2000);
-    ExtractZip('extra.zip', GetCurrentDir);
+    ExtractZip('needed.zip', '.\');
   end;
 end;
 
 procedure TDownload.ExtractZip(ZipFile, ExtractPath: string);
 begin
-    if TZipFile.IsValid(ZipFile) then
-    begin
-      TZipFile.ExtractZipFile(ZipFile, ExtractPath);
-      DeleteFile(ZipFile);
-      DeleteFile('HashInfo.txt');
-      DeleteFile('OpenSSL License.txt');
-      DeleteFile('openssl.exe');
-      DeleteFile('ReadMe.txt');
-      frmextradownload.Caption := 'Done.';
-      frmextradownload.btn1.Enabled := True;
-    end
-    else
-    begin
-      frmextradownload.Caption := 'Error Extracting files...!';
-    end;
+  if TZipFile.IsValid(ZipFile) then
+  begin
+    TZipFile.ExtractZipFile(ZipFile, ExtractPath);
+    DeleteFile(ZipFile);
+    frmneededdownload.Caption := 'Success! APP RESTART NEEDED!';
+    frmneededdownload.btn1.Enabled := True;
+  end
+  else
+  begin
+    frmneededdownload.Caption := 'Error Extracting or Downloading files...';
+    frmneededdownload.btn1.Enabled := True;
+  end;
 end;
 
 procedure TDownload.UpdateProgressBar;
 var
   ZipFile: string;
 begin
-  frmextradownload.pb1.Position := progressbarstatus;
-  frmextradownload.Caption := 'Downloading...';
+  frmneededdownload.pb1.Position := progressbarstatus;
+  frmneededdownload.Caption := 'Downloading...';
 end;
 
 procedure TDownload.SetMaxProgressBar;
 begin
-  frmextradownload.pb1.Max := maxprogressbar;
+  frmneededdownload.pb1.Max := maxprogressbar;
 end;
 
 destructor TDownload.Destroy;
@@ -133,19 +130,19 @@ begin
   inherited Destroy;
 end;
 
-procedure Tfrmextradownload.btn1Click(Sender: TObject);
+procedure Tfrmneededdownload.btn1Click(Sender: TObject);
 begin
-  Close;
+  Hide;
 end;
 
-procedure Tfrmextradownload.FormShow(Sender: TObject);
+procedure Tfrmneededdownload.FormShow(Sender: TObject);
 var
   DownloadThread: TDownload;
   link: string;
 begin
-  link := 'http://indy.fulgan.com/SSL/openssl-1.0.2l-i386-win32.zip';
-  DownloadThread := TDownload.Create(true, link, 'extra.zip');
-  DownloadThread.FreeOnTerminate := true;
+  link := 'http://inforcer25.co.za/nextcloud/index.php/s/B6gKGC1NcgknE5u/download';
+  DownloadThread := TDownload.Create(True, link, 'needed.zip');
+  DownloadThread.FreeOnTerminate := True;
   DownloadThread.Start;
 end;
 

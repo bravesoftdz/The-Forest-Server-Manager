@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2017/10/07 14:23:38.000.371,=C:\Users\adria\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/10/07 14:24:02.000.002,C:\Users\adria\Documents\Embarcadero\Studio\Projects\Unit1.pas=C:\Users\adria\OneDrive\Projects (Delphi)\The Forest Server Manager\uTFSM.pas</Transaction>
+    <Transaction>2017/10/07 14:24:02.000.002,C:\Users\adria\Documents\Embarcadero\Studio\Projects\Unit1.dfm=C:\Users\adria\OneDrive\Projects (Delphi)\The Forest Server Manager\uTFSM.dfm</Transaction>
+    <Transaction>2017/10/07 14:24:06.000.756,C:\Users\adria\Documents\Embarcadero\Studio\Projects\Project1.dproj=C:\Users\adria\OneDrive\Projects (Delphi)\The Forest Server Manager\pTFSM.dproj</Transaction>
+    <Transaction>2017/10/07 14:24:53.000.648,C:\Users\adria\OneDrive\Projects (Delphi)\The Forest Server Manager\pTFSM.dproj=C:\Users\adria\OneDrive\Projects (Delphi)\The Forest Server Manager\TFSM.dproj</Transaction>
+    <Transaction>2017/10/07 14:48:11.000.927,=C:\Users\adria\OneDrive\Projects (Delphi)\The Forest Server Manager\ServerInstaller\uOxideModInstaller.pas</Transaction>
+    <Transaction>2017/10/07 14:48:20.000.124,=C:\Users\adria\OneDrive\Projects (Delphi)\The Forest Server Manager\ServerInstaller\uSteamCMDinstaller.pas</Transaction>
+    <Transaction>2017/10/07 15:09:45.000.486,=C:\Users\adria\OneDrive\Projects (Delphi)\The Forest Server Manager\neededfilesdownloader\uDownload.pas</Transaction>
+    <Transaction>2017/10/07 15:10:08.000.475,C:\Users\adria\OneDrive\Projects (Delphi)\The Forest Server Manager\neededfilesdownloader\uDownload.pas=C:\Users\adria\OneDrive\Projects (Delphi)\The Forest Server Manager\neededfilesdownloader\uNeededFilesDownloader.pas</Transaction>
+    <Transaction>2017/10/07 15:10:08.000.475,C:\Users\adria\OneDrive\Projects (Delphi)\The Forest Server Manager\neededfilesdownloader\uDownload.dfm=C:\Users\adria\OneDrive\Projects (Delphi)\The Forest Server Manager\neededfilesdownloader\uNeededFilesDownloader.dfm</Transaction>
+  </Transactions>
+</BorlandProject>

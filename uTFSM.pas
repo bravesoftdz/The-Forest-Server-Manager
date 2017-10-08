@@ -1,101 +1,111 @@
-{
-  ###                                                   #####  #######
-  #  #    # ######  ####  #####   ####  ###### #####  #     # #
-  #  ##   # #      #    # #    # #    # #      #    #       # #
-  #  # #  # #####  #    # #    # #      #####  #    #  #####  ######
-  #  #  # # #      #    # #####  #      #      #####  #             #
-  #  #   ## #      #    # #   #  #    # #      #   #  #       #     #
-  ### #    # #       ####  #    #  ####  ###### #    # #######  #####
-
-  Follow me on Twitter for updates: https://twitter.com/inforcer25
-  Subscribe to me on YouTube: https://www.youtube.com/Inforcer25
-  GitHub: https://github.com/Inforcer25
-  Donate to me: https://www.paypal.me/Inforcer25
-}
 unit uTFSM;
 
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.ComCtrls,
-  Vcl.Imaging.pngimage, uDownload, WinInet, Vcl.StdCtrls, uSteamCMDinstaller,
-  uOxideModInstaller, DosCommand, Vcl.Samples.Spin, IniFiles;
+  Vcl.StdCtrls,
+  Vcl.Buttons, uOxideModInstaller, uSteamCMDinstaller, uNeededFilesDownloader,
+  IniFiles, DosCommand, Tlhelp32, Vcl.Samples.Spin, Vcl.WinXCtrls,
+  IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient, IdHTTP, ShellAPI;
 
 type
   TForm1 = class(TForm)
-    pnl1: TPanel;
-    pnl2: TPanel;
-    pgc1: TPageControl;
+    pnltop: TPanel;
+    pnlleft: TPanel;
+    pgctabs: TPageControl;
+    tswelcome: TTabSheet;
     tsserverconfig: TTabSheet;
     tsserverinstaller: TTabSheet;
-    tswelcome: TTabSheet;
+    tssettings: TTabSheet;
+    lblinstallerlog: TLabel;
+    mmosteamcmd: TMemo;
+    btninstallserver: TButton;
+    btninstalloxidemod: TButton;
+    btninstallsteamcmd: TButton;
+    btnverifyserverfiles: TButton;
+    btnstopinstall: TButton;
+    doscmdsteamcmd: TDosCommand;
     lbl1: TLabel;
-    mmoserverinstalllog: TMemo;
-    btn1: TButton;
-    btn2: TButton;
-    btn3: TButton;
-    dscmndserverinstaller: TDosCommand;
-    btn4: TButton;
-    btn5: TButton;
-    btn6: TButton;
-    img1: TImage;
-    lbledtservername: TLabeledEdit;
-    lbledtserverpass: TLabeledEdit;
-    btn7: TButton;
-    lbledtadminpass: TLabeledEdit;
-    btn8: TButton;
-    rginit: TRadioGroup;
-    lbledtsteamtoken: TLabeledEdit;
-    btn9: TButton;
-    rgdifficulty: TRadioGroup;
-    grpother: TGroupBox;
-    lbledtemail: TLabeledEdit;
-    chkvac: TCheckBox;
-    chklogwindow: TCheckBox;
-    lbl2: TLabel;
-    sedsaveinterval: TSpinEdit;
-    lbl3: TLabel;
-    sedsaveslot: TSpinEdit;
-    grp1: TGroupBox;
-    lbl4: TLabel;
-    edtsteamport: TEdit;
-    lbl5: TLabel;
-    edtgameport: TEdit;
-    lbl6: TLabel;
-    edtqueryport: TEdit;
-    btn10: TButton;
-    lbl7: TLabel;
-    lbl8: TLabel;
+    lblmadeby: TLabel;
     lblversion: TLabel;
-    lbl9: TLabel;
-    btn11: TButton;
-    btn12: TButton;
-    chkwithoutsteam: TCheckBox;
-    lbl10: TLabel;
+    tspluginmanager: TTabSheet;
+    lbl2: TLabel;
+    lbl3: TLabel;
+    lbl4: TLabel;
+    lbledtservername: TLabeledEdit;
+    lbledtserverpassword: TLabeledEdit;
+    lbledtadminpassword: TLabeledEdit;
+    lbledtserverip: TLabeledEdit;
+    lbledtqueryport: TLabeledEdit;
+    lbledtgameport: TLabeledEdit;
+    lbledtsteamport: TLabeledEdit;
+    lbledtcontactemail: TLabeledEdit;
+    grpserversettings: TGroupBox;
     sedmaxplayers: TSpinEdit;
-    procedure FormActivate(Sender: TObject);
-    function IsConnected: Boolean;
-    procedure btn2Click(Sender: TObject);
-    procedure btn3Click(Sender: TObject);
-    procedure btn7MouseDown(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure btn7MouseUp(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure btn8MouseDown(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure btn8MouseUp(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure btn6Click(Sender: TObject);
+    lblautosave: TLabel;
+    sedsaveinterval: TSpinEdit;
+    lblmaxplayers: TLabel;
+    lblsaveslot: TLabel;
+    sedsaveslot: TSpinEdit;
+    lbldifficulty: TLabel;
+    cbbdifficulty: TComboBox;
+    lblinittype: TLabel;
+    cbbinittype: TComboBox;
+    grpmisc: TGroupBox;
+    lbl5: TLabel;
+    tglswtchlogwindow: TToggleSwitch;
+    lbl6: TLabel;
+    tglswtchvac: TToggleSwitch;
+    lbl7: TLabel;
+    tglswtchveganmode: TToggleSwitch;
+    lbl8: TLabel;
+    tglswtchvegatarianmode: TToggleSwitch;
+    lbl9: TLabel;
+    tglswtchresetholesmode: TToggleSwitch;
+    lbltreeregrowmode: TLabel;
+    tglswtchtreeregrowmode: TToggleSwitch;
+    lbl10: TLabel;
+    tglswtchnobuildingdestruction: TToggleSwitch;
+    lbl11: TLabel;
+    tglswtchallowenemiescreative: TToggleSwitch;
+    btnsaveconfig: TButton;
+    btnstartserver: TButton;
+    chkautorestart: TCheckBox;
+    idhtplatestversion: TIdHTTP;
+    btnupdatetfsm: TButton;
     procedure FormCreate(Sender: TObject);
-    procedure btn11Click(Sender: TObject);
-    procedure btn12Click(Sender: TObject);
-    procedure btn1Click(Sender: TObject);
-    procedure btn4Click(Sender: TObject);
-    procedure btn5Click(Sender: TObject);
-    procedure btn10Click(Sender: TObject);
+    procedure btninstallsteamcmdClick(Sender: TObject);
+    procedure btninstalloxidemodClick(Sender: TObject);
+    procedure CheckNeededFiles;
+    procedure FormActivate(Sender: TObject);
+    procedure SaveSettingString(Section, Name, Value: string);
+    function LoadSettingString(Section, Name, Value: string): string;
+    procedure btninstallserverClick(Sender: TObject);
+    procedure CleanUp;
+    function KillTask(ExeFileName: string): Integer;
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    procedure btnstopinstallClick(Sender: TObject);
+    procedure btnsaveconfigClick(Sender: TObject);
+    procedure LoadAllSettings;
+    procedure btnstartserverClick(Sender: TObject);
+    function GetLatestVersion: string;
+    procedure OpenURL(URL: string);
+    procedure btnupdatetfsmClick(Sender: TObject);
   private
-    { Private declarations }
+    // Global
+    ini_settings: string;
+
+    // Server Config
+    servername, serverpassword, adminpassword, contactemail, serverip,
+      queryport, gameport, steamport, difficulty, inittype,
+
+      logwindow, vac, veganmode, vegatarianmode, resetholesmode, treeregrowmode,
+      nobuildingdestruction, allowenemiescreative: string;
+
+    maxplayers, saveslot, saveinterval: Integer;
   public
     { Public declarations }
   end;
@@ -107,352 +117,471 @@ implementation
 
 {$R *.dfm}
 
-procedure TForm1.btn10Click(Sender: TObject);
-var
-  config: TStringList;
-  steamport, gameport, queryport: string;
-  servername, maxplayers, vac, serverpass: string;
-  adminpass, steamtoken, autosave, difficulty, inittype: string;
-  saveslot, showlog, email: string;
-  ini: TIniFile;
-begin
-  steamport := edtsteamport.Text;
-  gameport := edtgameport.Text;
-  queryport := edtqueryport.Text;
-  servername := lbledtservername.Text;
-  maxplayers := IntToStr(sedmaxplayers.Value);
-
-  if chkvac.Checked then
-    vac := 'on'
-  else
-    vac := 'off';
-
-  serverpass := lbledtserverpass.Text;
-  adminpass := lbledtadminpass.Text;
-  steamtoken := lbledtsteamtoken.Text;
-  autosave := IntToStr(sedsaveinterval.Value);
-
-  if rgdifficulty.ItemIndex = 0 then
-    difficulty := 'Peaceful';
-  if rgdifficulty.ItemIndex = 1 then
-    difficulty := 'Normal';
-  if rgdifficulty.ItemIndex = 2 then
-    difficulty := 'Hard';
-
-  if rginit.ItemIndex = 0 then
-    inittype := 'New';
-  if rginit.ItemIndex = 1 then
-    inittype := 'Continue';
-
-  saveslot := IntToStr(sedsaveslot.Value);
-
-  if chklogwindow.Checked then
-    showlog := 'on'
-  else
-    showlog := 'off';
-
-  email := lbledtemail.Text;
-
-  config := TStringList.Create;
-  try
-    config.Add('serverIP ' + '0.0.0.0');
-    config.Add('serverSteamPort ' + steamport);
-    config.Add('serverGamePort ' + gameport);
-    config.Add('serverQueryPort ' + queryport);
-    config.Add('serverName ' + servername);
-    config.Add('serverPlayers ' + maxplayers);
-    config.Add('enableVAC ' + vac);
-    config.Add('serverPassword ' + serverpass);
-    config.Add('serverPasswordAdmin ' + adminpass);
-    config.Add('serverSteamAccount ' + steamtoken);
-    config.Add('serverAutoSaveInterval ' + autosave);
-    config.Add('difficulty ' + difficulty);
-    config.Add('initType ' + inittype);
-    config.Add('slot ' + saveslot);
-    config.Add('showLogs ' + showlog);
-    config.Add('serverContact ' + email);
-    config.SaveToFile(serverconfig);
-  finally
-    config.Clear;
-    config.Free;
-  end;
-
-  if DirectoryExists(GetEnvironmentVariable('APPDATA') + '\TheForestServerManager') then
-    begin
-      ini := TIniFile.Create(ini_serverconfig);
-      try
-        ini.WriteString('Server Config', 'serverIP', '0.0.0.0');
-        ini.WriteString('Server Config', 'serverSteamPort', steamport);
-        ini.WriteString('Server Config', 'serverGamePort', gameport);
-        ini.WriteString('Server Config', 'serverQueryPort', queryport);
-        ini.WriteString('Server Config', 'serverName', servername);
-        ini.WriteString('Server Config', 'serverPlayers', maxplayers);
-        ini.WriteString('Server Config', 'enableVAC', vac);
-        ini.WriteString('Server Config', 'serverPassword', serverpass);
-        ini.WriteString('Server Config', 'serverPasswordAdmin', adminpass);
-        ini.WriteString('Server Config', 'serverSteamAccount', steamtoken);
-        ini.WriteString('Server Config', 'serverAutoSaveInterval', autosave);
-        ini.WriteString('Server Config', 'difficulty', difficulty);
-        ini.WriteString('Server Config', 'initType', inittype);
-        ini.WriteString('Server Config', 'slot', saveslot);
-        ini.WriteString('Server Config', 'showLogs', showlog);
-        ini.WriteString('Server Config', 'serverContact', email);
-      finally
-        ini.Free;
-      end;
-    end
-  else
-    begin
-      MkDir(GetEnvironmentVariable('APPDATA') + '\TheForestServerManager');
-
-      ini := TIniFile.Create(ini_serverconfig);
-      try
-        ini.WriteString('Server Config', 'serverIP', GetLocalIP);
-        ini.WriteString('Server Config', 'serverSteamPort', steamport);
-        ini.WriteString('Server Config', 'serverGamePort', gameport);
-        ini.WriteString('Server Config', 'serverQueryPort', queryport);
-        ini.WriteString('Server Config', 'serverName', servername);
-        ini.WriteString('Server Config', 'serverPlayers', maxplayers);
-        ini.WriteString('Server Config', 'enableVAC', vac);
-        ini.WriteString('Server Config', 'serverPassword', serverpass);
-        ini.WriteString('Server Config', 'serverPasswordAdmin', adminpass);
-        ini.WriteString('Server Config', 'serverSteamAccount', steamtoken);
-        ini.WriteString('Server Config', 'serverAutoSaveInterval', autosave);
-        ini.WriteString('Server Config', 'difficulty', difficulty);
-        ini.WriteString('Server Config', 'initType', inittype);
-        ini.WriteString('Server Config', 'slot', saveslot);
-        ini.WriteString('Server Config', 'showLogs', showlog);
-        ini.WriteString('Server Config', 'serverContact', email);
-      finally
-        ini.Free;
-      end;
-    end;
-
-  ShowMessage('Config has been saved');
-end;
-
-procedure TForm1.btn11Click(Sender: TObject);
-begin
-  if chkwithoutsteam.Checked then
-    if FileExists('TheForestDedicatedServer.exe') then
-      WinExec('TheForestDedicatedServer.exe -nosteamclient', SW_SHOWNORMAL)
-    else
-      ShowMessage('Could not find TheForestDedicatedServer.exe! Is the server installed?')
-  else
-    if FileExists('TheForestDedicatedServer.exe') then
-      WinExec('TheForestDedicatedServer.exe', SW_SHOWNORMAL)
-    else
-      ShowMessage('Could not find TheForestDedicatedServer.exe! Is the server installed?');
-end;
-
-procedure TForm1.btn12Click(Sender: TObject);
-begin
-  lbledtservername.Clear;
-  lbledtserverpass.Clear;
-  lbledtadminpass.Clear;
-  lbledtsteamtoken.Clear;
-  lbledtemail.Clear;
-  edtsteamport.Text := '8766';
-  edtgameport.Text := '27015';
-  edtqueryport.Text := '27016';
-end;
-
-procedure TForm1.btn1Click(Sender: TObject);
-var
-  command: TStringList;
-begin
-  dscmndserverinstaller.Stop;
-  mmoserverinstalllog.Clear;
-  if FileExists('.\steamcmd\steamcmd.exe') then
-    begin
-      command:= TStringlist.create;
-      try
-        command.Clear;
-        command.Add('@echo off');
-        command.Add('echo Starting Installation...');
-        command.Add('.\steamcmd' + '\steamcmd.exe +login anonymous +force_install_dir "' + GetCurrentDir + '" +app_update 556450 +quit');
-        command.Add('echo Done');
-        command.SaveToFile('UpdateInstall.bat');
-      finally
-        command.Free
-      end;
-
-      dscmndserverinstaller.CommandLine := 'UpdateInstall.bat';
-      dscmndserverinstaller.OutputLines := mmoserverinstalllog.Lines;
-      dscmndserverinstaller.Execute;
-    end
-  else
-    ShowMessage('It seems that steamcmd is not installed. Please click Install SteamCMD below');
-end;
-
-procedure TForm1.btn2Click(Sender: TObject);
-begin
-  frmsteamcmdinstaller.ShowModal;
-end;
-
-procedure TForm1.btn3Click(Sender: TObject);
+procedure TForm1.btninstalloxidemodClick(Sender: TObject);
 begin
   frmoxidemodinstaller.ShowModal;
 end;
 
-procedure TForm1.btn4Click(Sender: TObject);
+procedure TForm1.btninstallserverClick(Sender: TObject);
 var
-  command: TStringList;
-begin
-  dscmndserverinstaller.Stop;
-  mmoserverinstalllog.Clear;
-  if FileExists('.\steamcmd\steamcmd.exe') then
-    begin
-      command:= TStringlist.create;
-      try
-        command.Clear;
-        command.Add('@echo off');
-        command.Add('echo Starting Installation...');
-        command.Add('.\steamcmd' + '\steamcmd.exe +login anonymous +force_install_dir "' + GetCurrentDir + '" +app_update 556450 +quit');
-        command.Add('echo Done');
-        command.SaveToFile('UpdateInstall.bat');
-      finally
-        command.Free
-      end;
-
-      dscmndserverinstaller.CommandLine := 'UpdateInstall.bat';
-      dscmndserverinstaller.OutputLines := mmoserverinstalllog.Lines;
-      dscmndserverinstaller.Execute;
-    end
-  else
-    ShowMessage('It seems that steamcmd is not installed. Please click Install SteamCMD below');
-end;
-
-procedure TForm1.btn5Click(Sender: TObject);
-var
-  command: TStringList;
+  batfile: TStringList;
 begin
   if FileExists('.\steamcmd\steamcmd.exe') then
-    begin
-      dscmndserverinstaller.Stop;
-      mmoserverinstalllog.Clear;
-      command:= TStringlist.create;
-      try
-        command.Clear;
-        command.Add('@echo off');
-        command.Add('echo Starting Validation DO NOT CLOSE THIS WINDOW!');
-        command.Add('.\steamcmd' + '\steamcmd.exe +login anonymous +force_install_dir "' + GetCurrentDir + '" +app_update 556450 validate +quit');
-        command.Add('echo Done');
-        command.SaveToFile('UpdateInstall.bat');
-      finally
-        command.Free
-      end;
+  begin
+    mmosteamcmd.Clear;
+    if doscmdsteamcmd.IsRunning then
+      doscmdsteamcmd.Stop;
 
-      dscmndserverinstaller.CommandLine := 'UpdateInstall.bat';
-      dscmndserverinstaller.OutputLines := mmoserverinstalllog.Lines;
-      dscmndserverinstaller.Execute;
-    end
-  else
-    ShowMessage('It seems that steamcmd is not installed. Please click Install SteamCMD below');
-end;
-
-procedure TForm1.btn6Click(Sender: TObject);
-begin
-  dscmndserverinstaller.Stop;
-  if dscmndserverinstaller.IsRunning = True then
-    ShowMessage('There was some kind of unknown error while trying to stop the current task. Please restart TFSM')
-  else
-    begin
-      ShowMessage('Task has been stopped!');
-      mmoserverinstalllog.Clear;
+    batfile := TStringList.Create;
+    try
+      batfile.Add('@echo off');
+      batfile.Add('echo Starting Server Installation...');
+      batfile.Add('.\steamcmd' +
+        '\steamcmd.exe +login anonymous +force_install_dir "' + GetCurrentDir +
+        '" +app_update 556450 +quit');
+      batfile.Add('echo Done.')
+    finally
+      batfile.SaveToFile('.\InstallUpdate.bat');
+      batfile.Free;
     end;
+
+    doscmdsteamcmd.CommandLine := '.\InstallUpdate.bat';
+    doscmdsteamcmd.OutputLines := mmosteamcmd.Lines;
+    doscmdsteamcmd.Execute;
+  end
+  else
+  begin
+    case MessageDlg
+      ('SteamCMD is not installed! Do you want TFSM to install it for you?',
+      mtConfirmation, [mbYes, mbCancel], 0) of
+      mrYes:
+        begin
+          frmsteamcmdinstaller.ShowModal;
+          btninstallserver.Click;
+        end;
+    end;
+  end;
 end;
 
-procedure TForm1.btn7MouseDown(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Integer);
+procedure TForm1.btninstallsteamcmdClick(Sender: TObject);
 begin
-  lbledtserverpass.PasswordChar := #0;
+  frmsteamcmdinstaller.ShowModal;
 end;
 
-procedure TForm1.btn7MouseUp(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Integer);
+procedure TForm1.btnsaveconfigClick(Sender: TObject);
 begin
-  lbledtserverpass.PasswordChar := '*';
+  // ==========================================================================
+  servername := lbledtservername.Text;
+  SaveSettingString('Server Config', 'servername', servername);
+
+  serverpassword := lbledtserverpassword.Text;
+  SaveSettingString('Server Config', 'serverpassword', serverpassword);
+
+  adminpassword := lbledtadminpassword.Text;
+  SaveSettingString('Server Config', 'adminpassword', adminpassword);
+
+  contactemail := lbledtcontactemail.Text;
+  SaveSettingString('Server Config', 'contactemail', contactemail);
+
+  serverip := lbledtserverip.Text;
+  SaveSettingString('Server Config', 'serverip', serverip);
+
+  queryport := lbledtqueryport.Text;
+  SaveSettingString('Server Config', 'queryport', queryport);
+
+  gameport := lbledtgameport.Text;
+  SaveSettingString('Server Config', 'gameport', gameport);
+
+  steamport := lbledtsteamport.Text;
+  SaveSettingString('Server Config', 'steamport', steamport);
+
+  difficulty := cbbdifficulty.Text;
+  SaveSettingString('Server Config', 'difficulty', difficulty);
+
+  inittype := cbbinittype.Text;
+  SaveSettingString('Server Config', 'inittype', inittype);
+  // ==========================================================================
+  if tglswtchlogwindow.State = tssOn then
+  begin
+    logwindow := 'on';
+    SaveSettingString('Server Config', 'logwindow', logwindow);
+  end
+  else
+  begin
+    logwindow := 'off';
+    SaveSettingString('Server Config', 'logwindow', logwindow);
+  end;
+
+  if tglswtchvac.State = tssOn then
+  begin
+    vac := 'on';
+    SaveSettingString('Server Config', 'vac', vac);
+  end
+  else
+  begin
+    vac := 'off';
+    SaveSettingString('Server Config', 'vac', vac);
+  end;
+
+  if tglswtchveganmode.State = tssOn then
+  begin
+    veganmode := 'on';
+    SaveSettingString('Server Config', 'veganmode', veganmode);
+  end
+  else
+  begin
+    veganmode := 'off';
+    SaveSettingString('Server Config', 'veganmode', veganmode);
+  end;
+
+  if tglswtchvegatarianmode.State = tssOn then
+  begin
+    vegatarianmode := 'on';
+    SaveSettingString('Server Config', 'vegatarianmode', vegatarianmode);
+  end
+  else
+  begin
+    vegatarianmode := 'off';
+    SaveSettingString('Server Config', 'vegatarianmode', vegatarianmode);
+  end;
+
+  if tglswtchresetholesmode.State = tssOn then
+  begin
+    resetholesmode := 'on';
+    SaveSettingString('Server Config', 'resetholesmode', resetholesmode);
+  end
+  else
+  begin
+    resetholesmode := 'off';
+    SaveSettingString('Server Config', 'resetholesmode', resetholesmode);
+  end;
+
+  if tglswtchtreeregrowmode.State = tssOn then
+  begin
+    treeregrowmode := 'on';
+    SaveSettingString('Server Config', 'treeregrowmode', treeregrowmode);
+  end
+  else
+  begin
+    treeregrowmode := 'off';
+    SaveSettingString('Server Config', 'treeregrowmode', treeregrowmode);
+  end;
+
+  if tglswtchnobuildingdestruction.State = tssOn then
+  begin
+    nobuildingdestruction := 'on';
+    SaveSettingString('Server Config', 'nobuildingdestruction',
+      nobuildingdestruction);
+  end
+  else
+  begin
+    nobuildingdestruction := 'off';
+    SaveSettingString('Server Config', 'nobuildingdestruction',
+      nobuildingdestruction);
+  end;
+
+  if tglswtchnobuildingdestruction.State = tssOn then
+  begin
+    nobuildingdestruction := 'on';
+    SaveSettingString('Server Config', 'nobuildingdestruction',
+      nobuildingdestruction);
+  end
+  else
+  begin
+    nobuildingdestruction := 'off';
+    SaveSettingString('Server Config', 'nobuildingdestruction',
+      nobuildingdestruction);
+  end;
+
+  if tglswtchallowenemiescreative.State = tssOn then
+  begin
+    allowenemiescreative := 'on';
+    SaveSettingString('Server Config', 'allowenemiescreative',
+      allowenemiescreative);
+  end
+  else
+  begin
+    allowenemiescreative := 'off';
+    SaveSettingString('Server Config', 'allowenemiescreative',
+      allowenemiescreative);
+  end;
+  // ==========================================================================
+  maxplayers := sedmaxplayers.Value;
+  SaveSettingString('Server Config', 'maxplayers', IntToStr(maxplayers));
+
+  saveslot := sedsaveslot.Value;
+  SaveSettingString('Server Config', 'saveslot', IntToStr(saveslot));
+
+  saveinterval := sedsaveinterval.Value;
+  SaveSettingString('Server Config', 'saveinterval', IntToStr(saveinterval));
 end;
 
-procedure TForm1.btn8MouseDown(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Integer);
+procedure TForm1.btnstartserverClick(Sender: TObject);
+var
+  batfile: TStringList;
 begin
-  lbledtadminpass.PasswordChar := #0;
+  batfile := TStringList.Create;
+  try
+    batfile.Add('@echo off');
+    batfile.Add(':start');
+    batfile.Add('cls');
+    batfile.Add('echo Starting Server...');
+    batfile.Add('TheForestDedicatedServer.exe ^');
+    batfile.Add('-nosteamclient ^');
+    batfile.Add('-serverip ' + serverip + ' ^');
+    batfile.Add('-servergameport ' + gameport + ' ^');
+    batfile.Add('-serverqueryport ' + queryport + ' ^');
+    batfile.Add('-serversteamport ' + steamport + ' ^');
+    batfile.Add('-servername "' + servername + '" ^');
+    batfile.Add('-serverplayers ' + IntToStr(maxplayers) + ' ^');
+    batfile.Add('-serverautosaveinterval ' + IntToStr(saveinterval) + ' ^');
+    batfile.Add('-serverpassword "' + serverpassword + '" ^');
+    batfile.Add('-serverpassword_admin "' + adminpassword + '" ^');
+    batfile.Add('-enableVAC ' + vac + ' ^');
+    batfile.Add('-difficulty ' + difficulty + ' ^');
+    batfile.Add('-inittype ' + inittype + ' ^');
+    batfile.Add('-slot ' + IntToStr(saveslot) + ' ^');
+    batfile.Add('-showlogs ' + logwindow + ' ^');
+    batfile.Add('-veganmode ' + veganmode + ' ^');
+    batfile.Add('-vegetarianmode ' + vegatarianmode + ' ^');
+    batfile.Add('-resetholesmode ' + resetholesmode + ' ^');
+    batfile.Add('-treeregrowmode ' + treeregrowmode + ' ^');
+    batfile.Add('-nobuildingdestruction ' + nobuildingdestruction + ' ^');
+    batfile.Add('-allowenemiescreative ' + allowenemiescreative);
+    if chkautorestart.Checked then
+    begin
+      batfile.Add('cls');
+      batfile.Add('echo Restarting Server...');
+      batfile.Add('timeout /t 10');
+      batfile.Add('goto start');
+    end;
+  finally
+    batfile.SaveToFile('start.bat');
+    batfile.Free;
+  end;
+
+  if FileExists('TheForestDedicatedServer.exe') then
+    WinExec('start.bat', SW_SHOWNORMAL)
+  else
+    ShowMessage('Could not find TheForestDedicatedServer.exe. Is the server installed?');
 end;
 
-procedure TForm1.btn8MouseUp(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Integer);
+procedure TForm1.btnstopinstallClick(Sender: TObject);
 begin
-  lbledtadminpass.PasswordChar := '*';
+  if doscmdsteamcmd.IsRunning then
+  begin
+    doscmdsteamcmd.Stop;
+    mmosteamcmd.Clear;
+    KillTask('steamcmd.exe');
+  end;
+end;
+
+procedure TForm1.btnupdatetfsmClick(Sender: TObject);
+begin
+  OpenURL('https://inforcer25.co.za/');
+end;
+
+procedure TForm1.CheckNeededFiles;
+begin
+  if not FileExists('libeay32.dll') or not FileExists('ssleay32.dll') or
+    not FileExists('TheForest.ttf') then
+  begin
+    DeleteFile('ssleay32.dll');
+    DeleteFile('libeay32.dll');
+
+    ShowMessage('Some files seem to be missing. It will now be downloaded.');
+    frmneededdownload.ShowModal;
+  end;
+end;
+
+procedure TForm1.CleanUp;
+begin
+  RemoveFontResource('TheForest.ttf');
+  if doscmdsteamcmd.IsRunning then
+    doscmdsteamcmd.Stop;
+  KillTask('steamcmd.exe');
 end;
 
 procedure TForm1.FormActivate(Sender: TObject);
 begin
-  if FileExists('libeay32.dll') and FileExists('ssleay32.dll') then
-    //
-  else
-    begin
-      ShowMessage('TFSM needs 2 missing files to work. They will be downloaded after clicking ok. (Size: 1mb)');
+  CheckNeededFiles;
+  lblversion.Caption := GetLatestVersion;
+end;
 
-      if IsConnected = True then
-        frmextradownload.ShowModal
-      else
-        ShowMessage('Error: There is no internet connection!');
-    end;
+procedure TForm1.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+begin
+  try
+    CleanUp;
+  finally
+    CanClose := True;
+  end;
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
-  Application.Title := 'The Forest Server Manager';
+  Application.Title := 'TFSM (BETA)';
+  ini_settings := '.\TFSMConfig.ini';
+  AddFontResource('TheForest.ttf');
+  LoadAllSettings;
 end;
 
-function TForm1.IsConnected: Boolean;
-const
-  // Local system has a valid connection to the Internet, but it might or might
-  // not be currently connected.
-  INTERNET_CONNECTION_CONFIGURED = $40;
-
-  // Local system uses a local area network to connect to the Internet.
-  INTERNET_CONNECTION_LAN = $02;
-
-  // Local system uses a modem to connect to the Internet
-  INTERNET_CONNECTION_MODEM = $01;
-
-  // Local system is in offline mode.
-  INTERNET_CONNECTION_OFFLINE = $20;
-
-  // Local system uses a proxy server to connect to the Internet
-  INTERNET_CONNECTION_PROXY = $04;
-
-  // Local system has RAS installed.
-  INTERNET_RAS_INSTALLED = $10;
-
-var
-  InetState: DWORD;
-  hHttpSession, hReqUrl: HInternet;
+function TForm1.GetLatestVersion: string;
 begin
-  Result := InternetGetConnectedState(@InetState, 0);
-  if (Result and (InetState and INTERNET_CONNECTION_CONFIGURED =
-    INTERNET_CONNECTION_CONFIGURED)) then
-  begin
-    // so far we ONLY know there's a valid connection. See if we can grab some
-    // known URL ...
-    hHttpSession := InternetOpen(Pchar(Application.Title),
-      // this line is the agent string
-      INTERNET_OPEN_TYPE_PRECONFIG, nil, nil, 0);
-    try
-      hReqUrl := InternetOpenURL(hHttpSession,
-        Pchar('41.185.91.51' { the URL to check } ), nil, 0, 0, 0);
-      Result := hReqUrl <> nil;
-      InternetCloseHandle(hReqUrl);
-    finally
-      InternetCloseHandle(hHttpSession);
-    end;
-  end
-  else if (InetState and INTERNET_CONNECTION_OFFLINE =
-    INTERNET_CONNECTION_OFFLINE) then
-    Result := False; // we know for sure we are offline.
+  Result := idhtplatestversion.Get('http://41.185.91.51/TFSM/version.html');
 end;
+
+function TForm1.KillTask(ExeFileName: string): Integer;
+const
+  PROCESS_TERMINATE = $0001;
+var
+  ContinueLoop: BOOL;
+  FSnapshotHandle: THandle;
+  FProcessEntry32: TProcessEntry32;
+begin
+  Result := 0;
+  FSnapshotHandle := CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+  FProcessEntry32.dwSize := sizeof(FProcessEntry32);
+  ContinueLoop := Process32First(FSnapshotHandle, FProcessEntry32);
+
+  while Integer(ContinueLoop) <> 0 do
+  begin
+    if ((UpperCase(ExtractFileName(FProcessEntry32.szExeFile))
+      = UpperCase(ExeFileName)) or (UpperCase(FProcessEntry32.szExeFile)
+      = UpperCase(ExeFileName))) then
+      Result := Integer(TerminateProcess(OpenProcess(PROCESS_TERMINATE, BOOL(0),
+        FProcessEntry32.th32ProcessID), 0));
+    ContinueLoop := Process32Next(FSnapshotHandle, FProcessEntry32);
+  end;
+  CloseHandle(FSnapshotHandle);
+end;
+
+procedure TForm1.LoadAllSettings;
+begin
+  // TODO Finish loading settings
+  servername := LoadSettingString('Server Config', 'servername',
+    'Welcome to my server.');
+  lbledtservername.Text := servername;
+
+  serverpassword := LoadSettingString('Server Config', 'serverpassword', '');
+  lbledtserverpassword.Text := serverpassword;
+
+  adminpassword := LoadSettingString('Server Config', 'adminpassword',
+    'changeme');
+  lbledtadminpassword.Text := adminpassword;
+
+  contactemail := LoadSettingString('Server Config', 'contactemail', '');
+  lbledtcontactemail.Text := contactemail;
+
+  serverip := LoadSettingString('Server Config', 'serverip', '0.0.0.0');
+  lbledtserverip.Text := serverip;
+
+  queryport := LoadSettingString('Server Config', 'queryport', '27016');
+  lbledtqueryport.Text := queryport;
+
+  gameport := LoadSettingString('Server Config', 'gameport', '27015');
+  lbledtgameport.Text := gameport;
+
+  steamport := LoadSettingString('Server Config', 'steamport', '27016');
+  lbledtsteamport.Text := steamport;
+
+  difficulty := LoadSettingString('Server Config', 'difficulty', 'Normal');
+  cbbdifficulty.ItemIndex := cbbdifficulty.Items.IndexOf(difficulty);
+
+  inittype := LoadSettingString('Server Config', 'inittype', 'New');
+  cbbinittype.ItemIndex := cbbinittype.Items.IndexOf(inittype);
+
+  logwindow := LoadSettingString('Server Config', 'logwindow', 'off');
+  if logwindow = 'on' then
+    tglswtchlogwindow.State := tssOn
+  else
+    tglswtchlogwindow.State := tssOff;
+
+  vac := LoadSettingString('Server Config', 'vac', 'on');
+  if vac = 'on' then
+    tglswtchvac.State := tssOn
+  else
+    tglswtchvac.State := tssOff;
+
+  veganmode := LoadSettingString('Server Config', 'veganmode', 'off');
+  if veganmode = 'on' then
+    tglswtchveganmode.State := tssOn
+  else
+    tglswtchveganmode.State := tssOff;
+
+  vegatarianmode := LoadSettingString('Server Config', 'vegatarianmode', 'off');
+  if vegatarianmode = 'on' then
+    tglswtchvegatarianmode.State := tssOn
+  else
+    tglswtchvegatarianmode.State := tssOff;
+
+  resetholesmode := LoadSettingString('Server Config', 'resetholesmode', 'off');
+  if resetholesmode = 'on' then
+    tglswtchresetholesmode.State := tssOn
+  else
+    tglswtchresetholesmode.State := tssOff;
+
+  treeregrowmode := LoadSettingString('Server Config', 'treeregrowmode', 'off');
+  if resetholesmode = 'on' then
+    tglswtchtreeregrowmode.State := tssOn
+  else
+    tglswtchtreeregrowmode.State := tssOff;
+
+  nobuildingdestruction := LoadSettingString('Server Config',
+    'nobuildingdestruction', 'off');
+  if nobuildingdestruction = 'on' then
+    tglswtchnobuildingdestruction.State := tssOn
+  else
+    tglswtchnobuildingdestruction.State := tssOff;
+
+  allowenemiescreative := LoadSettingString('Server Config',
+    'allowenemiescreative', 'off');
+  if allowenemiescreative = 'on' then
+    tglswtchallowenemiescreative.State := tssOn
+  else
+    tglswtchallowenemiescreative.State := tssOff;
+
+  maxplayers := StrToInt(LoadSettingString('Server Config', 'maxplayers', '8'));
+  sedmaxplayers.Value := maxplayers;
+
+  saveslot := StrToInt(LoadSettingString('Server Config', 'saveslot', '1'));
+  sedsaveslot.Value := saveslot;
+
+  saveinterval := StrToInt(LoadSettingString('Server Config',
+    'saveinterval', '15'));
+  sedsaveinterval.Value := saveinterval;
+end;
+
+function TForm1.LoadSettingString(Section, Name, Value: string): string;
+var
+  ini: TIniFile;
+begin
+  ini := TIniFile.Create(ini_settings);
+  try
+    Result := ini.ReadString(Section, Name, Value);
+  finally
+    ini.Free;
+  end;
+end;
+
+procedure TForm1.OpenURL(URL: string);
+begin
+  ShellExecute(self.WindowHandle,'open',PChar(url),nil,nil, SW_SHOWNORMAL);
+end;
+
+procedure TForm1.SaveSettingString(Section, Name, Value: string);
+var
+  ini: TIniFile;
+begin
+  ini := TIniFile.Create(ini_settings);
+  try
+    ini.WriteString(Section, Name, Value);
+  finally
+    ini.Free;
+  end;
+end;
+
+initialization
+
+ReportMemoryLeaksOnShutdown := True;
 
 end.

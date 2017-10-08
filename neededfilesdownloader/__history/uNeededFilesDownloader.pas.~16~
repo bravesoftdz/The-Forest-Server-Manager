@@ -1,33 +1,29 @@
-unit uSteamCMDinstaller;
+unit uNeededFilesDownloader;
 
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
-  System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
-  Vcl.ComCtrls, IdComponent,
-  IdTCPConnection, IdTCPClient, IdHTTP, System.Zip;
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.ComCtrls, IdBaseComponent, IdComponent,
+  IdTCPConnection, IdTCPClient, IdHTTP, System.Zip, ActiveX;
 
 type
 
   TDownload = class;
 
-  Tfrmsteamcmdinstaller = class(TForm)
-    lbl1: TLabel;
-    pb1: TProgressBar;
+  Tfrmneededdownload = class(TForm)
     btn1: TButton;
-    btn2: TButton;
-    lblstatus: TLabel;
-    procedure btn2Click(Sender: TObject);
+    pnl1: TPanel;
+    pb1: TProgressBar;
     procedure btn1Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
   end;
 
-  TDownload = class(TThread)
+   TDownload = class(TThread)
   private
     httpclient: TIdHTTP;
     url: string;
@@ -49,27 +45,11 @@ type
   end;
 
 var
-  frmsteamcmdinstaller: Tfrmsteamcmdinstaller;
+  frmneededdownload: Tfrmneededdownload;
 
 implementation
 
 {$R *.dfm}
-
-procedure Tfrmsteamcmdinstaller.btn1Click(Sender: TObject);
-var
-  DownloadThread: TDownload;
-  link: string;
-begin
-  link := 'http://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip';
-  DownloadThread := TDownload.Create(true, link, 'steamcmd.zip');
-  DownloadThread.FreeOnTerminate := true;
-  DownloadThread.Start;
-end;
-
-procedure Tfrmsteamcmdinstaller.btn2Click(Sender: TObject);
-begin
-  Close;
-end;
 
 { TDownload }
 
@@ -108,66 +88,62 @@ begin
     Stream.SaveToFile(filename);
   finally
     Stream.Free;
+    frmneededdownload.Caption := 'Done Downloading. Extracting...';
+    Sleep(2000);
+    ExtractZip('needed.zip', '.\');
   end;
 end;
 
 procedure TDownload.ExtractZip(ZipFile, ExtractPath: string);
 begin
-  if DirectoryExists('.\steamcmd') then
-  begin
     if TZipFile.IsValid(ZipFile) then
     begin
       TZipFile.ExtractZipFile(ZipFile, ExtractPath);
-      frmsteamcmdinstaller.lblstatus.Caption := 'SteamCMD Installed!';
       DeleteFile(ZipFile);
+      frmneededdownload.Caption := 'Done.';
+      ShowMessage('The download was a success!' + sLineBreak + sLineBreak + 'Please restart TFSM for the files to full effect.');
+      frmneededdownload.btn1.Enabled := True;
     end
     else
     begin
-      ShowMessage('Error installing...!');
-      frmsteamcmdinstaller.lblstatus.Caption := 'Error Installing ...!';
+      frmneededdownload.Caption := 'Error Extracting or Downloading files...';
+      frmneededdownload.btn1.Enabled := True;
     end;
-  end
-  else
-  begin
-    MkDir('.\steamcmd');
-    if TZipFile.IsValid(ZipFile) then
-    begin
-      TZipFile.ExtractZipFile(ZipFile, ExtractPath);
-      frmsteamcmdinstaller.lblstatus.Caption := 'SteamCMD Installed!';
-      DeleteFile(ZipFile);
-    end
-    else
-    begin
-      ShowMessage('Error installing...!');
-      frmsteamcmdinstaller.lblstatus.Caption := 'Error Installing ...!';
-    end;
-  end;
 end;
 
 procedure TDownload.UpdateProgressBar;
 var
   ZipFile: string;
 begin
-  frmsteamcmdinstaller.pb1.Position := progressbarstatus;
-  frmsteamcmdinstaller.lblstatus.Caption := 'Downloading...';
-
-  if frmsteamcmdinstaller.pb1.Position = frmsteamcmdinstaller.pb1.Max then
-  begin
-    frmsteamcmdinstaller.lblstatus.Caption := 'Done Downloading. Installing...';
-    Sleep(2000);
-    ExtractZip('steamcmd.zip', '.\steamcmd');
-  end;
+  frmneededdownload.pb1.Position := progressbarstatus;
+  frmneededdownload.Caption := 'Downloading...';
 end;
 
 procedure TDownload.SetMaxProgressBar;
 begin
-  frmsteamcmdinstaller.pb1.Max := maxprogressbar;
+  frmneededdownload.pb1.Max := maxprogressbar;
 end;
 
 destructor TDownload.Destroy;
 begin
   FreeAndNil(httpclient);
   inherited Destroy;
+end;
+
+procedure Tfrmneededdownload.btn1Click(Sender: TObject);
+begin
+  Hide;
+end;
+
+procedure Tfrmneededdownload.FormShow(Sender: TObject);
+var
+  DownloadThread: TDownload;
+  link: string;
+begin
+  link := 'http://inforcer25.co.za/nextcloud/index.php/s/B6gKGC1NcgknE5u/download';
+  DownloadThread := TDownload.Create(true, link, 'needed.zip');
+  DownloadThread.FreeOnTerminate := true;
+  DownloadThread.Start;
 end;
 
 end.
