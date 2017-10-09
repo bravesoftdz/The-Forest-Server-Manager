@@ -9,10 +9,11 @@ uses
   Vcl.StdCtrls,
   Vcl.Buttons, uOxideModInstaller, uSteamCMDinstaller, uNeededFilesDownloader,
   IniFiles, DosCommand, Tlhelp32, Vcl.Samples.Spin, Vcl.WinXCtrls,
-  IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient, IdHTTP, ShellAPI;
+  IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient, IdHTTP, ShellAPI,
+  Vcl.Themes;
 
 type
-  TForm1 = class(TForm)
+  Tfrmmain = class(TForm)
     pnltop: TPanel;
     pnlleft: TPanel;
     pgctabs: TPageControl;
@@ -33,7 +34,6 @@ type
     lblversion: TLabel;
     tspluginmanager: TTabSheet;
     lbl2: TLabel;
-    lbl3: TLabel;
     lbl4: TLabel;
     lbledtservername: TLabeledEdit;
     lbledtserverpassword: TLabeledEdit;
@@ -76,6 +76,19 @@ type
     chkautorestart: TCheckBox;
     idhtplatestversion: TIdHTTP;
     btnupdatetfsm: TButton;
+    btnreporterror: TButton;
+    btngithub: TButton;
+    btnwebsite: TButton;
+    lblinstructions: TLabel;
+    lbl12: TLabel;
+    lbl13: TLabel;
+    mmo1: TMemo;
+    grptheme: TGroupBox;
+    cbbtheme: TComboBox;
+    grptransparency: TGroupBox;
+    trckbrtransparency: TTrackBar;
+    tsautobackup: TTabSheet;
+    lbl3: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure btninstallsteamcmdClick(Sender: TObject);
     procedure btninstalloxidemodClick(Sender: TObject);
@@ -94,6 +107,14 @@ type
     function GetLatestVersion: string;
     procedure OpenURL(URL: string);
     procedure btnupdatetfsmClick(Sender: TObject);
+    procedure btnreporterrorClick(Sender: TObject);
+    procedure btngithubClick(Sender: TObject);
+    procedure btnwebsiteClick(Sender: TObject);
+    procedure btnverifyserverfilesClick(Sender: TObject);
+    procedure cbbthemeChange(Sender: TObject);
+    procedure LoadThemeList;
+    procedure trckbrtransparencyChange(Sender: TObject);
+    procedure pgctabsChange(Sender: TObject);
   private
     // Global
     ini_settings: string;
@@ -111,18 +132,23 @@ type
   end;
 
 var
-  Form1: TForm1;
+  frmmain: Tfrmmain;
 
 implementation
 
 {$R *.dfm}
 
-procedure TForm1.btninstalloxidemodClick(Sender: TObject);
+procedure Tfrmmain.btngithubClick(Sender: TObject);
+begin
+  OpenURL('https://github.com/Inforcer25/The-Forest-Server-Manager/');
+end;
+
+procedure Tfrmmain.btninstalloxidemodClick(Sender: TObject);
 begin
   frmoxidemodinstaller.ShowModal;
 end;
 
-procedure TForm1.btninstallserverClick(Sender: TObject);
+procedure Tfrmmain.btninstallserverClick(Sender: TObject);
 var
   batfile: TStringList;
 begin
@@ -163,12 +189,17 @@ begin
   end;
 end;
 
-procedure TForm1.btninstallsteamcmdClick(Sender: TObject);
+procedure Tfrmmain.btninstallsteamcmdClick(Sender: TObject);
 begin
   frmsteamcmdinstaller.ShowModal;
 end;
 
-procedure TForm1.btnsaveconfigClick(Sender: TObject);
+procedure Tfrmmain.btnreporterrorClick(Sender: TObject);
+begin
+  OpenURL('https://github.com/Inforcer25/The-Forest-Server-Manager/issues');
+end;
+
+procedure Tfrmmain.btnsaveconfigClick(Sender: TObject);
 begin
   // ==========================================================================
   servername := lbledtservername.Text;
@@ -316,7 +347,7 @@ begin
   SaveSettingString('Server Config', 'saveinterval', IntToStr(saveinterval));
 end;
 
-procedure TForm1.btnstartserverClick(Sender: TObject);
+procedure Tfrmmain.btnstartserverClick(Sender: TObject);
 var
   batfile: TStringList;
 begin
@@ -363,10 +394,11 @@ begin
   if FileExists('TheForestDedicatedServer.exe') then
     WinExec('start.bat', SW_SHOWNORMAL)
   else
-    ShowMessage('Could not find TheForestDedicatedServer.exe. Is the server installed?');
+    ShowMessage
+      ('Could not find TheForestDedicatedServer.exe. Is the server installed?');
 end;
 
-procedure TForm1.btnstopinstallClick(Sender: TObject);
+procedure Tfrmmain.btnstopinstallClick(Sender: TObject);
 begin
   if doscmdsteamcmd.IsRunning then
   begin
@@ -376,12 +408,64 @@ begin
   end;
 end;
 
-procedure TForm1.btnupdatetfsmClick(Sender: TObject);
+procedure Tfrmmain.btnupdatetfsmClick(Sender: TObject);
 begin
   OpenURL('https://inforcer25.co.za/');
 end;
 
-procedure TForm1.CheckNeededFiles;
+procedure Tfrmmain.btnverifyserverfilesClick(Sender: TObject);
+var
+  batfile: TStringList;
+begin
+  if FileExists('.\steamcmd\steamcmd.exe') then
+  begin
+    mmosteamcmd.Clear;
+    if doscmdsteamcmd.IsRunning then
+      doscmdsteamcmd.Stop;
+
+    batfile := TStringList.Create;
+    try
+      batfile.Add('@echo off');
+      batfile.Add('echo Starting Server Validation...');
+      batfile.Add('.\steamcmd' +
+        '\steamcmd.exe +login anonymous +force_install_dir "' + GetCurrentDir +
+        '" +app_update 556450 validate +quit');
+      batfile.Add('echo Done.')
+    finally
+      batfile.SaveToFile('.\InstallUpdate.bat');
+      batfile.Free;
+    end;
+
+    doscmdsteamcmd.CommandLine := '.\InstallUpdate.bat';
+    doscmdsteamcmd.OutputLines := mmosteamcmd.Lines;
+    doscmdsteamcmd.Execute;
+  end
+  else
+  begin
+    case MessageDlg
+      ('SteamCMD is not installed! Do you want TFSM to install it for you?',
+      mtConfirmation, [mbYes, mbCancel], 0) of
+      mrYes:
+        begin
+          frmsteamcmdinstaller.ShowModal;
+          btnverifyserverfiles.Click;;
+        end;
+    end;
+  end;
+end;
+
+procedure Tfrmmain.btnwebsiteClick(Sender: TObject);
+begin
+  OpenURL('https://inforcer25.co.za/the-forest-server-manager.html');
+end;
+
+procedure Tfrmmain.cbbthemeChange(Sender: TObject);
+begin
+  TStyleManager.TrySetStyle(cbbtheme.Text);
+  SaveSettingString('App Settings', 'theme', cbbtheme.Text);
+end;
+
+procedure Tfrmmain.CheckNeededFiles;
 begin
   if not FileExists('libeay32.dll') or not FileExists('ssleay32.dll') or
     not FileExists('TheForest.ttf') then
@@ -394,7 +478,7 @@ begin
   end;
 end;
 
-procedure TForm1.CleanUp;
+procedure Tfrmmain.CleanUp;
 begin
   RemoveFontResource('TheForest.ttf');
   if doscmdsteamcmd.IsRunning then
@@ -402,13 +486,13 @@ begin
   KillTask('steamcmd.exe');
 end;
 
-procedure TForm1.FormActivate(Sender: TObject);
+procedure Tfrmmain.FormActivate(Sender: TObject);
 begin
   CheckNeededFiles;
   lblversion.Caption := GetLatestVersion;
 end;
 
-procedure TForm1.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+procedure Tfrmmain.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
   try
     CleanUp;
@@ -417,20 +501,21 @@ begin
   end;
 end;
 
-procedure TForm1.FormCreate(Sender: TObject);
+procedure Tfrmmain.FormCreate(Sender: TObject);
 begin
-  Application.Title := 'TFSM (BETA)';
+  Application.Title := 'TFSM';
   ini_settings := '.\TFSMConfig.ini';
   AddFontResource('TheForest.ttf');
+  LoadThemeList;
   LoadAllSettings;
 end;
 
-function TForm1.GetLatestVersion: string;
+function Tfrmmain.GetLatestVersion: string;
 begin
   Result := idhtplatestversion.Get('http://41.185.91.51/TFSM/version.html');
 end;
 
-function TForm1.KillTask(ExeFileName: string): Integer;
+function Tfrmmain.KillTask(ExeFileName: string): Integer;
 const
   PROCESS_TERMINATE = $0001;
 var
@@ -455,9 +540,11 @@ begin
   CloseHandle(FSnapshotHandle);
 end;
 
-procedure TForm1.LoadAllSettings;
+procedure Tfrmmain.LoadAllSettings;
+var
+  i: Integer;
 begin
-  // TODO Finish loading settings
+  // Server Config
   servername := LoadSettingString('Server Config', 'servername',
     'Welcome to my server.');
   lbledtservername.Text := servername;
@@ -549,9 +636,18 @@ begin
   saveinterval := StrToInt(LoadSettingString('Server Config',
     'saveinterval', '15'));
   sedsaveinterval.Value := saveinterval;
+
+  // App Settings
+  TStyleManager.TrySetStyle(LoadSettingString('App Settings', 'theme',
+    'Material Oxford Blue'));
+  cbbtheme.ItemIndex := cbbtheme.Items.IndexOf(TStyleManager.ActiveStyle.Name);
+
+  trckbrtransparency.Position := StrToInt(LoadSettingString('App Settings', 'transparency', '255'));
+
+  pgctabs.ActivePageIndex := StrToInt(LoadSettingString('App Settings', 'lasttab', '1'));
 end;
 
-function TForm1.LoadSettingString(Section, Name, Value: string): string;
+function Tfrmmain.LoadSettingString(Section, Name, Value: string): string;
 var
   ini: TIniFile;
 begin
@@ -563,12 +659,25 @@ begin
   end;
 end;
 
-procedure TForm1.OpenURL(URL: string);
+procedure Tfrmmain.LoadThemeList;
+var
+  stylename: string;
 begin
-  ShellExecute(self.WindowHandle,'open',PChar(url),nil,nil, SW_SHOWNORMAL);
+  for stylename in TStyleManager.StyleNames do
+    cbbtheme.Items.Add(stylename);
 end;
 
-procedure TForm1.SaveSettingString(Section, Name, Value: string);
+procedure Tfrmmain.OpenURL(URL: string);
+begin
+  ShellExecute(self.WindowHandle, 'open', PChar(URL), nil, nil, SW_SHOWNORMAL);
+end;
+
+procedure Tfrmmain.pgctabsChange(Sender: TObject);
+begin
+  SaveSettingString('App Settings', 'lasttab', IntToStr(pgctabs.ActivePageIndex));
+end;
+
+procedure Tfrmmain.SaveSettingString(Section, Name, Value: string);
 var
   ini: TIniFile;
 begin
@@ -578,6 +687,13 @@ begin
   finally
     ini.Free;
   end;
+end;
+
+procedure Tfrmmain.trckbrtransparencyChange(Sender: TObject);
+begin
+  AlphaBlendValue := trckbrtransparency.Position;
+  SaveSettingString('App Settings', 'transparency',
+    IntToStr(trckbrtransparency.Position));
 end;
 
 initialization
