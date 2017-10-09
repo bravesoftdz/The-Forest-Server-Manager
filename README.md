@@ -3,7 +3,7 @@ TFSM is a tool used to create dedicated servers for The Forest
 
 <h2>Links</h2>
 <ul>
-  <li><a href="https://github.com/Inforcer25/The-Forest-Server-Manager/releases">Download here</a></li>
+  <li><a href="https://github.com/Inforcer25/The-Forest-Server-Manager/releases">Releases</a></li>
   <li><a href="https://inforcer25.co.za/">Official Website (Download)</a></li>
 </ul>
 
